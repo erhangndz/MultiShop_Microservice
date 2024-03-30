@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Options;
 using Multishop.Catalog.Services;
 using Multishop.Catalog.Services.CategoryServices;
+using Multishop.Catalog.Services.ProductDetailServices;
+using Multishop.Catalog.Services.ProductPhotoServices;
 using Multishop.Catalog.Services.ProductServices;
 using Multishop.Catalog.Settings;
 using System.Reflection;
@@ -9,13 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(nameof(DatabaseSettings)));
-builder.Services.AddSingleton(sp =>
+builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 {
     return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<IProductDetailService,ProductDetailService>();
+builder.Services.AddScoped<IProductPhotoService,ProductPhotoService>();
 builder.Services.AddScoped(typeof(IRepository<>),typeof(GenericRepository<>));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

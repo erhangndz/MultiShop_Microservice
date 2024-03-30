@@ -8,7 +8,7 @@ namespace Multishop.Catalog.Services
     {
         private readonly IMongoCollection<T> _collection;
 
-        public GenericRepository(DatabaseSettings settings)
+        public GenericRepository(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database= client.GetDatabase(settings.DatabaseName);

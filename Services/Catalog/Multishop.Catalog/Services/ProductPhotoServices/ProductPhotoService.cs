@@ -5,7 +5,7 @@ namespace Multishop.Catalog.Services.ProductPhotoServices
 {
     public class ProductPhotoService : GenericRepository<ProductPhoto>, IProductPhotoService
     {
-        public ProductPhotoService(DatabaseSettings settings) : base(settings)
+        public ProductPhotoService(IDatabaseSettings settings) : base(settings)
         {
         }
     }

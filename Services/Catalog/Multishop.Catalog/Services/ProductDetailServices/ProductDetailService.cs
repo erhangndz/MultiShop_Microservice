@@ -5,7 +5,7 @@ namespace Multishop.Catalog.Services.ProductDetailServices
 {
     public class ProductDetailService : GenericRepository<ProductDetail>, IProductDetailService
     {
-        public ProductDetailService(DatabaseSettings settings) : base(settings)
+        public ProductDetailService(IDatabaseSettings settings) : base(settings)
         {
         }
     }

@@ -5,7 +5,7 @@ namespace Multishop.Catalog.Services.ProductServices
 {
     public class ProductService : GenericRepository<Product>, IProductService
     {
-        public ProductService(DatabaseSettings settings) : base(settings)
+        public ProductService(IDatabaseSettings settings) : base(settings)
         {
         }
     }
