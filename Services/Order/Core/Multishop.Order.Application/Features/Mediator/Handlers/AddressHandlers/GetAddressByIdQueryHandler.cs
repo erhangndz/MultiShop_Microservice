@@ -17,9 +17,8 @@ namespace Multishop.Order.Application.Features.Mediator.Handlers.AddressHandlers
     {
         public async Task<GetAddressByIdQueryResult> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
         {
-            var value = await repository.GetByIdAsync(request.Id);
-
-            return ObjectMapper.Mapper.Map<GetAddressByIdQueryResult>(value);
+        
+            return ObjectMapper.Mapper.Map<GetAddressByIdQueryResult>(await repository.GetByIdAsync(request.Id));
         }
     }
 }

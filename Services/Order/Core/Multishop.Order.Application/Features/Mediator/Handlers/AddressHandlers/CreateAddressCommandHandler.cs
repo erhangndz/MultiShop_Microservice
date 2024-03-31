@@ -15,8 +15,8 @@ namespace Multishop.Order.Application.Features.Mediator.Handlers.AddressHandlers
     {
         public async Task Handle(CreateAddressCommand request, CancellationToken cancellationToken)
         {
-            var newAddress = ObjectMapper.Mapper.Map<Address>(request);
-            await repository.CreateAsync(newAddress);
+          
+            await repository.CreateAsync(ObjectMapper.Mapper.Map<Address>(request));
         }
     }
 }
