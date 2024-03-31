@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Multishop.Discount.Context;
+using Multishop.Discount.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IDiscountService,DiscountService>(); 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<DiscountContext>(opt =>
 {

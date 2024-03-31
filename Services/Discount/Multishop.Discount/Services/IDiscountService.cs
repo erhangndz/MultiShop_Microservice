@@ -5,7 +5,7 @@ namespace Multishop.Discount.Services
 {
     public interface IDiscountService
     {
-        Task<List<ResultCouponDto>> GetAllCouponsAsync();
+        Task<IEnumerable<ResultCouponDto>> GetAllCouponsAsync();
 
         Task CreateCouponAsync(CreateCouponDto createCouponDto);
         Task UpdateCouponAsync(UpdateCouponDto updateCouponDto);

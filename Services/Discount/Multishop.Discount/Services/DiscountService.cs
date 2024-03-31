@@ -1,32 +1,50 @@
-﻿using Multishop.Discount.Dtos;
+﻿using AutoMapper;
+using Dapper;
+using Multishop.Discount.Context;
+using Multishop.Discount.Dtos;
+using System.Data;
 
 namespace Multishop.Discount.Services
 {
-    public class DiscountService : IDiscountService
+    public class DiscountService(DiscountContext _context) : IDiscountService
     {
-        public Task CreateCouponAsync(CreateCouponDto createCouponDto)
+        private readonly IDbConnection _connection = _context.CreateConnection();
+        public async Task CreateCouponAsync(CreateCouponDto dto)
         {
-            throw new NotImplementedException();
+            var query = $"insert into coupons (code,rate,IsActive,validdate) values (@Code,@Rate,@IsActive,@ValidDate)";
+
+            var parameters = new DynamicParameters();
+            parameters.AddDynamicParams(dto);
+            await _connection.ExecuteAsync(query,parameters);
+            
         }
 
-        public Task DeleteCouponAsync(int id)
+        public async Task DeleteCouponAsync(int id)
         {
-            throw new NotImplementedException();
+            var query = $"delete from coupons where CouponId={id}";
+            await _connection.ExecuteAsync(query);
         }
 
-        public Task<List<ResultCouponDto>> GetAllCouponsAsync()
+        public async Task<IEnumerable<ResultCouponDto>> GetAllCouponsAsync()
         {
-            throw new NotImplementedException();
+            var query = "select * from coupons";
+          return await _connection.QueryAsync<ResultCouponDto>(query);
         }
 
-        public Task<ResultCouponDto> GetCouponByIdAsync(int id)
+        public async Task<ResultCouponDto> GetCouponByIdAsync(int id)
         {
-            throw new NotImplementedException();
+
+            var query = $"select * from coupons where CouponId={id}";
+         return await _connection.QueryFirstOrDefaultAsync<ResultCouponDto>(query);
         }
 
-        public Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
+        public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
         {
-            throw new NotImplementedException();
+            var query = $"update coupons set Code=@Code,rate=@Rate,Isactive=@IsActive,validdate=@ValidDate where CouponId={updateCouponDto.CouponId}";
+            var parameters = new DynamicParameters();
+            parameters.AddDynamicParams(updateCouponDto);
+
+            await _connection.ExecuteAsync(query,parameters);
         }
     }
 }
