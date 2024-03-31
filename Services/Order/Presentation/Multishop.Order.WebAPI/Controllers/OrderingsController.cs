@@ -1,0 +1,48 @@
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Multishop.Order.Application.Features.Mediator.Commands.AddressCommands;
+using Multishop.Order.Application.Features.Mediator.Commands.OrderingCommands;
+using Multishop.Order.Application.Features.Mediator.Queries.AddressQueries;
+using Multishop.Order.Application.Features.Mediator.Queries.OrderingQueries;
+
+namespace Multishop.Order.WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrderingsController(IMediator mediator) : ControllerBase
+    {
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {          
+            return Ok(await mediator.Send(new GetOrderingQuery()));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {          
+            return Ok(await mediator.Send(new GetOrderingByIdQuery(id)));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await mediator.Send(new RemoveOrderingCommand(id));
+            return Ok("Sipariş Silindi");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateOrderingCommand command)
+        {
+            await mediator.Send(command);
+            return Ok("Sipariş Oluşturuldu");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateOrderingCommand command)
+        {
+            await mediator.Send(command);
+            return Ok("Sipariş Güncellendi");
+        }
+    }
+}
