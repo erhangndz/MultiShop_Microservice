@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.Catalog.Dtos.ProductDetailDtos;
@@ -7,6 +8,7 @@ using Multishop.Catalog.Services.ProductDetailServices;
 
 namespace Multishop.Catalog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductDetailsController(IProductDetailService _ProductDetailService,IMapper _mapper) : ControllerBase

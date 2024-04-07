@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.Catalog.Dtos.CategoryDtos;
@@ -7,6 +8,7 @@ using Multishop.Catalog.Services.CategoryServices;
 
 namespace Multishop.Catalog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController(ICategoryService _categoryService,IMapper _mapper) : ControllerBase
