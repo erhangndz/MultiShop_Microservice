@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Multishop.Cargo.DataAccess\Multishop.Cargo.DataAccess.csproj" />
+    <ProjectReference Include="..\Multishop.Cargo.Entity\Multishop.Cargo.Entity.csproj" />
   </ItemGroup>
 
 </Project>
