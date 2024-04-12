@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.Cargo.Business.Abstract;
@@ -8,6 +9,7 @@ using Multishop.Cargo.Entity.Entities;
 
 namespace Multishop.Cargo.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController(IGenericService<Customer> customerService,IMapper mapper) : ControllerBase
