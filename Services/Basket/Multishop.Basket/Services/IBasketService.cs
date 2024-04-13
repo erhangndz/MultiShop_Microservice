@@ -1,13 +1,13 @@
-﻿using Multishop.Basket.Models;
+﻿
+
+using Multishop.Basket.Dtos;
 
 namespace Multishop.Basket.Services
 {
-    public interface IBasketService<T> where T : class
+    public interface IBasketService
     {
-        Task<IList<T>> GetAll();
-        Task<T> GetById(int id);
-        Task Delete(int id);
-        Task Create(T entity);
-        Task Update(T entity);
+        Task<BasketTotalDto> GetBasketAsync(string userId);
+        Task SaveBasketAsync(BasketTotalDto basketTotalDto);
+        Task DeleteBasketAsync(string userId);
     }
 }

@@ -1,31 +1,31 @@
 ﻿
+using Multishop.Basket.Dtos;
+using Multishop.Basket.Settings;
+using Newtonsoft.Json;
+
 namespace Multishop.Basket.Services
 {
-    public class BasketService<T> : IBasketService<T> where T : class
+    public class BasketService(RedisService _redisService) : IBasketService
     {
-        public Task Create(T entity)
+        public async Task DeleteBasketAsync(string userId)
         {
-            throw new NotImplementedException();
+            await _redisService.GetDb().KeyDeleteAsync(userId);
         }
 
-        public Task Delete(int id)
+        public async Task<BasketTotalDto> GetBasketAsync(string userId)
         {
-            throw new NotImplementedException();
+          var existBasket = await _redisService.GetDb().StringGetAsync(userId);
+            if (string.IsNullOrEmpty(existBasket))
+            {
+                return new BasketTotalDto();
+            }
+            return JsonConvert.DeserializeObject<BasketTotalDto>(existBasket);
+
         }
 
-        public Task<IList<T>> GetAll()
+        public async Task SaveBasketAsync(BasketTotalDto basketTotalDto)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(T entity)
-        {
-            throw new NotImplementedException();
+            await _redisService.GetDb().StringSetAsync(basketTotalDto.UserId, JsonConvert.SerializeObject(basketTotalDto));
         }
     }
 }

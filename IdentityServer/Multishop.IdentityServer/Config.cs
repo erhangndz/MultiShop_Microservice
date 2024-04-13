@@ -58,7 +58,7 @@ namespace Multishop.IdentityServer
             {
                 ClientId="MultishopManagerId",
                 ClientName="Multishop Manager User",
-                AllowedGrantTypes=GrantTypes.ClientCredentials,
+                AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
                ClientSecrets= {new Secret("multishopsecret".Sha256())},
                AllowedScopes={ "CatalogFullPermission" }
             },
@@ -68,7 +68,7 @@ namespace Multishop.IdentityServer
             {
                  ClientId="MultishopAdminId",
                 ClientName="Multishop Admin User",
-                AllowedGrantTypes=GrantTypes.ClientCredentials,
+                AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
                ClientSecrets= {new Secret("multishopsecret".Sha256())},
                AllowedScopes=
                 { "CatalogFullPermission", "DiscountFullPermission","CargoFullPermission", "OrderFullPermission", "BasketFullPermission",
