@@ -9,6 +9,12 @@ namespace Multishop.Basket.Controllers
     [ApiController]
     public class BasketsController : ControllerBase
     {
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var values = new List<string>();
+            return Ok(values);
+        }
     }
 }
 
