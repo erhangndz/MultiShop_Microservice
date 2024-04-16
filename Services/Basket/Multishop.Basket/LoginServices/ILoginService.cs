@@ -2,6 +2,6 @@
 {
     public interface ILoginService
     {
-        public string GetUserId();
+        public string GetUserId { get; }
     }
 }

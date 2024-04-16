@@ -2,9 +2,9 @@
 
 namespace Multishop.Catalog.Entities
 {
-    public class ProductPhoto: BaseEntity
+    public class ProductPhoto : BaseEntity
     {
-        
+
 
         public string ImageUrl1 { get; set; }
         public string ImageUrl2 { get; set; }

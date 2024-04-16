@@ -2,7 +2,7 @@
 
 namespace Multishop.Catalog.Services.ProductPhotoServices
 {
-    public interface IProductPhotoService: IRepository<ProductPhoto>
+    public interface IProductPhotoService : IRepository<ProductPhoto>
     {
     }
 }

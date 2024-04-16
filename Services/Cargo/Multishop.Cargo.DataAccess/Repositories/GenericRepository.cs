@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Multishop.Cargo.DataAccess.Abstract;
 using Multishop.Cargo.DataAccess.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Multishop.Cargo.DataAccess.Repositories
 {

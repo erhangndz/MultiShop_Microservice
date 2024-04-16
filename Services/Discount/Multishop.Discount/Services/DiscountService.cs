@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Dapper;
+﻿using Dapper;
 using Multishop.Discount.Context;
 using Multishop.Discount.Dtos;
 using System.Data;
@@ -15,8 +14,8 @@ namespace Multishop.Discount.Services
 
             var parameters = new DynamicParameters();
             parameters.AddDynamicParams(dto);
-            await _connection.ExecuteAsync(query,parameters);
-            
+            await _connection.ExecuteAsync(query, parameters);
+
         }
 
         public async Task DeleteCouponAsync(int id)
@@ -28,14 +27,14 @@ namespace Multishop.Discount.Services
         public async Task<IEnumerable<ResultCouponDto>> GetAllCouponsAsync()
         {
             var query = "select * from coupons";
-          return await _connection.QueryAsync<ResultCouponDto>(query);
+            return await _connection.QueryAsync<ResultCouponDto>(query);
         }
 
         public async Task<ResultCouponDto> GetCouponByIdAsync(int id)
         {
 
             var query = $"select * from coupons where CouponId={id}";
-         return await _connection.QueryFirstOrDefaultAsync<ResultCouponDto>(query);
+            return await _connection.QueryFirstOrDefaultAsync<ResultCouponDto>(query);
         }
 
         public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
@@ -44,7 +43,7 @@ namespace Multishop.Discount.Services
             var parameters = new DynamicParameters();
             parameters.AddDynamicParams(updateCouponDto);
 
-            await _connection.ExecuteAsync(query,parameters);
+            await _connection.ExecuteAsync(query, parameters);
         }
     }
 }

@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Multishop.Order.Application.Interfaces;
 using Multishop.Order.Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Multishop.Order.Persistence.Repositories
 {
@@ -28,7 +23,7 @@ namespace Multishop.Order.Persistence.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-           return await Table.ToListAsync();
+            return await Table.ToListAsync();
         }
 
         public Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)

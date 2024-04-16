@@ -9,15 +9,17 @@ namespace Multishop.Basket.Settings
         private ConnectionMultiplexer _connectionMultiplexer;
 
 
+
         public RedisService(string host, int port)
+
         {
             _host = host;
             _port = port;
-           
+
         }
 
         public void Connect() => _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
 
-        public IDatabase GetDb(int db=1)=> _connectionMultiplexer.GetDatabase(db);
+        public IDatabase GetDb(int db = 1) => _connectionMultiplexer.GetDatabase(db);
     }
 }

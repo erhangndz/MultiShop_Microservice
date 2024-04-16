@@ -1,5 +1,4 @@
 ﻿using Multishop.Discount.Dtos;
-using Multishop.Discount.Entities;
 
 namespace Multishop.Discount.Services
 {

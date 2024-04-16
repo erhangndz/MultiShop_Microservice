@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Multishop.Cargo.DTO.CargoDetailDtos
+﻿namespace Multishop.Cargo.DTO.CargoDetailDtos
 {
     public class UpdateCargoDetailDto
     {

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.Catalog.Dtos.ProductPhotoDtos;
 using Multishop.Catalog.Entities;
@@ -11,7 +10,7 @@ namespace Multishop.Catalog.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductPhotosController(IProductPhotoService _ProductPhotoService,IMapper _mapper) : ControllerBase
+    public class ProductPhotosController(IProductPhotoService _ProductPhotoService, IMapper _mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()

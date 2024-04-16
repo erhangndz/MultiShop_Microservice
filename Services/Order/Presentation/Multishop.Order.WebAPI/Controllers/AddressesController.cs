@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Multishop.Order.Application.Features.Mediator.Commands.AddressCommands;
 using Multishop.Order.Application.Features.Mediator.Queries.AddressQueries;
 
@@ -16,7 +14,7 @@ namespace Multishop.Order.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var values =await mediator.Send(new GetAddressQuery());
+            var values = await mediator.Send(new GetAddressQuery());
             return Ok(values);
         }
 

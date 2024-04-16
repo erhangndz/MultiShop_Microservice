@@ -1,10 +1,5 @@
 ﻿using Multishop.Cargo.Business.Abstract;
 using Multishop.Cargo.DataAccess.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Multishop.Cargo.Business.Concrete
 {
@@ -12,7 +7,7 @@ namespace Multishop.Cargo.Business.Concrete
     {
         public void TCreate(T entity)
         {
-           genericDal.Create(entity);
+            genericDal.Create(entity);
         }
 
         public void TDelete(int id)
@@ -27,7 +22,7 @@ namespace Multishop.Cargo.Business.Concrete
 
         public T TGetById(int id)
         {
-           return genericDal.GetById(id);
+            return genericDal.GetById(id);
         }
 
         public void TUpdate(T entity)

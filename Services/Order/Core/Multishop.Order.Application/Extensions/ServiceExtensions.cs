@@ -1,11 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Multishop.Order.Application.Features.Mediator.Handlers.OrderingHandlers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Multishop.Order.Application.Extensions
 {

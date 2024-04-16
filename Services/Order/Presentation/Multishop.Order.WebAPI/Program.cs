@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Multishop.Order.Application.Extensions;
-using Multishop.Order.Application.Features.Mediator.Handlers.AddressHandlers;
 using Multishop.Order.Application.Interfaces;
 using Multishop.Order.Persistence.Context;
 using Multishop.Order.Persistence.Repositories;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

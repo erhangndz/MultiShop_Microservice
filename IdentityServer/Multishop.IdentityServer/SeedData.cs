@@ -2,16 +2,16 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System;
-using System.Linq;
-using System.Security.Claims;
 using IdentityModel;
-using Multishop.IdentityServer.Data;
-using Multishop.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Multishop.IdentityServer.Data;
+using Multishop.IdentityServer.Models;
 using Serilog;
+using System;
+using System.Linq;
+using System.Security.Claims;
 
 namespace Multishop.IdentityServer
 {

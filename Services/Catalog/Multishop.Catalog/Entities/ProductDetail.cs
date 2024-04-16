@@ -2,9 +2,9 @@
 
 namespace Multishop.Catalog.Entities
 {
-    public class ProductDetail: BaseEntity
+    public class ProductDetail : BaseEntity
     {
-        
+
 
         public string Description { get; set; }
         public string Info { get; set; }

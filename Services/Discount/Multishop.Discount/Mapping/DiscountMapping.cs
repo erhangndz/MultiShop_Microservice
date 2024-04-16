@@ -4,7 +4,7 @@ using Multishop.Discount.Entities;
 
 namespace Multishop.Discount.Mapping
 {
-    public class DiscountMapping: Profile
+    public class DiscountMapping : Profile
     {
         public DiscountMapping()
         {

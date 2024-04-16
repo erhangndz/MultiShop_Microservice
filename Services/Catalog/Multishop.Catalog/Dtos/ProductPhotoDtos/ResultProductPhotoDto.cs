@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using Multishop.Catalog.Entities;
+﻿using Multishop.Catalog.Entities;
 
 namespace Multishop.Catalog.Dtos.ProductPhotoDtos
 {

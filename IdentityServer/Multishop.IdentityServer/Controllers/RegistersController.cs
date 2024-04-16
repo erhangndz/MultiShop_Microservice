@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.IdentityServer.Dtos;
@@ -30,7 +29,7 @@ namespace Multishop.IdentityServer.Controllers
                 Email = registerDto.Email,
 
             };
-          var result =   await _userManager.CreateAsync(user, registerDto.Password);
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);

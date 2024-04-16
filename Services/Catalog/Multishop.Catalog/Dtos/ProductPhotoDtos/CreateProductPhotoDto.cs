@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using Multishop.Catalog.Entities;
-
-namespace Multishop.Catalog.Dtos.ProductPhotoDtos
+﻿namespace Multishop.Catalog.Dtos.ProductPhotoDtos
 {
     public class CreateProductPhotoDto
     {
@@ -12,6 +9,6 @@ namespace Multishop.Catalog.Dtos.ProductPhotoDtos
         public string ImageUrl3 { get; set; }
         public string ProductId { get; set; }
 
-  
+
     }
 }

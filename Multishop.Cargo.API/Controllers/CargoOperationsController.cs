@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.Cargo.Business.Abstract;
 using Multishop.Cargo.DTO.CargoOperationDtos;
-using Multishop.Cargo.DTO.CustomerDtos;
 using Multishop.Cargo.Entity.Entities;
 
 namespace Multishop.Cargo.API.Controllers
@@ -12,7 +10,7 @@ namespace Multishop.Cargo.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CargoOperationsController(IGenericService<CargoOperation> cargoOperationService,IMapper mapper) : ControllerBase
+    public class CargoOperationsController(IGenericService<CargoOperation> cargoOperationService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public IActionResult GetAll()

@@ -6,15 +6,10 @@ using Multishop.Order.Application.Features.Mediator.Results.AddressResults;
 using Multishop.Order.Application.Features.Mediator.Results.OrderDetailResults;
 using Multishop.Order.Application.Features.Mediator.Results.OrderingResults;
 using Multishop.Order.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Multishop.Order.Application.MappingConfigs
 {
-    public class GeneralMapping: Profile
+    public class GeneralMapping : Profile
     {
         public GeneralMapping()
         {
@@ -33,7 +28,7 @@ namespace Multishop.Order.Application.MappingConfigs
             CreateMap<UpdateOrderingCommand, Ordering>().ReverseMap();
             CreateMap<GetOrderingQueryResult, Ordering>().ReverseMap();
             CreateMap<GetOrderingByIdQueryResult, Ordering>().ReverseMap();
-           
+
         }
     }
 }

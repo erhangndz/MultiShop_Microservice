@@ -6,7 +6,7 @@ using Multishop.Cargo.Entity.Entities;
 
 namespace Multishop.Cargo.API.Mapping
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {

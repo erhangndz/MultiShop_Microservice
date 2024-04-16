@@ -12,7 +12,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.Authority = builder.Configuration["IdentityServerUrl"];
     opt.Audience = "ResourceDiscount";
 });
-builder.Services.AddScoped<IDiscountService,DiscountService>(); 
+builder.Services.AddScoped<IDiscountService, DiscountService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<DiscountContext>(opt =>
 {

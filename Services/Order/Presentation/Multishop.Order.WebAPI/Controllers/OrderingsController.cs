@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Multishop.Order.Application.Features.Mediator.Commands.AddressCommands;
 using Multishop.Order.Application.Features.Mediator.Commands.OrderingCommands;
-using Multishop.Order.Application.Features.Mediator.Queries.AddressQueries;
 using Multishop.Order.Application.Features.Mediator.Queries.OrderingQueries;
 
 namespace Multishop.Order.WebAPI.Controllers
@@ -16,13 +13,13 @@ namespace Multishop.Order.WebAPI.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()
-        {          
+        {
             return Ok(await mediator.Send(new GetOrderingQuery()));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
-        {          
+        {
             return Ok(await mediator.Send(new GetOrderingByIdQuery(id)));
         }
 

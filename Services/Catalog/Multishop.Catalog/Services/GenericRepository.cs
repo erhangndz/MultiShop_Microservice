@@ -11,7 +11,7 @@ namespace Multishop.Catalog.Services
         public GenericRepository(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
-            var database= client.GetDatabase(settings.DatabaseName);
+            var database = client.GetDatabase(settings.DatabaseName);
             _collection = database.GetCollection<T>(typeof(T).Name.ToLowerInvariant());
         }
 
@@ -27,18 +27,18 @@ namespace Multishop.Catalog.Services
 
         public async Task<List<T>> GetAllAsync()
         {
-           return await _collection.AsQueryable().ToListAsync();
+            return await _collection.AsQueryable().ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(string id)
         {
-          return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
-          
+            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
         }
 
         public async Task UpdateAsync(T entity)
         {
-          await  _collection.FindOneAndReplaceAsync(x => x.Id == entity.Id,entity);
+            await _collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
         }
     }
 }

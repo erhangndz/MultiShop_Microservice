@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.Catalog.Dtos.CategoryDtos;
 using Multishop.Catalog.Entities;
@@ -11,13 +10,13 @@ namespace Multishop.Catalog.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController(ICategoryService _categoryService,IMapper _mapper) : ControllerBase
+    public class CategoriesController(ICategoryService _categoryService, IMapper _mapper) : ControllerBase
     {
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var values =await _categoryService.GetAllAsync();
+            var values = await _categoryService.GetAllAsync();
             return Ok(_mapper.Map<List<ResultCategoryDto>>(values));
         }
 
@@ -32,7 +31,7 @@ namespace Multishop.Catalog.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-           var value =  await _categoryService.GetByIdAsync(id);
+            var value = await _categoryService.GetByIdAsync(id);
             return Ok(value);
         }
 
