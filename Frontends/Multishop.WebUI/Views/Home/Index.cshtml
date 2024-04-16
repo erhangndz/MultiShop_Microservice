@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ürün Listesi";
+    ViewData["home"] = "active";
     Layout = "~/Views/UILayout/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
+@await Component.InvokeAsync("_HomeCarousel")
