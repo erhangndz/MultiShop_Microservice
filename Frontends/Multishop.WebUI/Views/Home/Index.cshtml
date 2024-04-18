@@ -1,12 +1,20 @@
 ﻿
 @{
-    ViewData["Title"] = "Ürün Listesi";
+    ViewData["Title"] = "";
     ViewData["home"] = "active";
     Layout = "~/Views/UILayout/_Layout.cshtml";
 }
 
 
-@await Component.InvokeAsync("_HomeCarousel")
+@await Component.InvokeAsync("_HomeCarousel") 
 
 @await Component.InvokeAsync("_HomeService")
+
+@await Component.InvokeAsync("_HomeCategories")
+
+@await Component.InvokeAsync("_HomeProducts")
+
+@await Component.InvokeAsync("_HomeOfferDiscount")
+
+@await Component.InvokeAsync("_HomeBrands")
 

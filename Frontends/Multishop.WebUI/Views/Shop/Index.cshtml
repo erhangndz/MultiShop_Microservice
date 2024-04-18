@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Ürün Filtreleme";
+    ViewData["shop"] = "active";
+    Layout = "~/Views/UILayout/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+           @await Component.InvokeAsync("_ShopPriceFilter")
+            <!-- Price End -->
+            <!-- Color Start -->
+            @await Component.InvokeAsync("_ShopColorFilter")
+            <!-- Color End -->
+            <!-- Size Start -->
+            @await Component.InvokeAsync("_ShopSizeFilter")
+            <!-- Size End -->
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        @await Component.InvokeAsync("_ShopFilteredProductList")
+        <!-- Shop Product End -->
+    </div>
+</div>
+
