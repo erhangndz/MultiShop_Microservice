@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Kategoriler";
+    ViewData["SubTitle"] = "Alt Başlık";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+         
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Search" type="email">
+            </div>
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th class="sortable">SKU</th>
+                        <th class="sortable">Invoice#</th>
+                        <th class="sortable">Customer Name</th>
+                        <th class="sortable">Status</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td class="text-truncate">OV-101777</td>
+                    <td class="text-truncate"><a href="#">VIO-0035421</a></td>
+                    <td class="text-truncate">Florence Douglas</td>
+                    <td class="text-truncate"><span class="lable-tag tag-success">Paid</span></td>
+                    <td class="text-truncate">$ 653.00</td>
+                </tr>
+               
+            </table>
+            <ul class="pagination m-bot-0">
+                <li> <a href="#" aria-label="Önceki"> <span aria-hidden="true">«</span> </a> </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li> <a href="#" aria-label="Sonraki"> <span aria-hidden="true">»</span> </a> </li>
+            </ul>
+        </div>
+    </div>
+</div>

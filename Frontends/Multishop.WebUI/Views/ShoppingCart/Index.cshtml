@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["SubTitleHref"] = "/Shop/Index";
+    ViewData["SubTitle"] = "Ürünler";
+    ViewData["Title"] = "Sepetim";
+    Layout = "~/Views/UILayout/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        @await Component.InvokeAsync("_ShoppingCartProductList")
+        @await Component.InvokeAsync("_ShoppingCartDiscountCoupon")
+       
+    </div>
+</div>
