@@ -1,7 +1,6 @@
-﻿
+﻿@model List<ResultCategoryDto>
 @{
     ViewData["Title"] = "Kategoriler";
-    ViewData["SubTitle"] = "Alt Başlık";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
@@ -11,36 +10,38 @@
         <div class="chart-box">
          
             <div id="example_filter" class="dataTables_filter pull-right">
-                <input class="form-control" id="placeholderInput" placeholder="Search" type="email">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
             </div>
             <table class="table table-responsive">
+                @{
+                    int count = 0;
+                }
                 <thead>
                     <tr>
-                        <th class="sortable">SKU</th>
-                        <th class="sortable">Invoice#</th>
-                        <th class="sortable">Customer Name</th>
-                        <th class="sortable">Status</th>
-                        <th>Amount</th>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Kategori Adı</th>
+                        <th class="sortable">Kategoriye Ait Ürünler</th>
+                        <th class="sortable">İşlemler</th>
+                       
                     </tr>
                 </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
                 <tr>
-                    <td class="text-truncate">OV-101777</td>
-                    <td class="text-truncate"><a href="#">VIO-0035421</a></td>
-                    <td class="text-truncate">Florence Douglas</td>
-                    <td class="text-truncate"><span class="lable-tag tag-success">Paid</span></td>
-                    <td class="text-truncate">$ 653.00</td>
+                    <td class="text-truncate">@count</td>
+                    <td class="text-truncate">@item.CategoryName</td>
+                    <td class="text-truncate"><a class="btn btn-success" asp-action="ProductsByCategory" asp-route-id="@item.Id">Ürünler</a></td>
+                    <td class="text-truncate">
+                        <a class="btn btn-danger" asp-action="DeleteCategory" asp-route-id="@item.Id">Sil</a>
+                            <a class="btn btn-info" asp-action="UpdateCategory" asp-route-id="@item.Id">Güncelle</a>
+                    </td>
                 </tr>
+                }
                
             </table>
-            <ul class="pagination m-bot-0">
-                <li> <a href="#" aria-label="Önceki"> <span aria-hidden="true">«</span> </a> </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li> <a href="#" aria-label="Sonraki"> <span aria-hidden="true">»</span> </a> </li>
-            </ul>
+           <a class="btn btn-primary" asp-action="CreateCategory" asp-controller="Category" asp-area="Admin">Yeni Kategori Ekle</a>
         </div>
     </div>
 </div>
