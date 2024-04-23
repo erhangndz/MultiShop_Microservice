@@ -36,5 +36,24 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
             await _client.PostAsJsonAsync("categories", createCategoryDto);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> DeleteCategory(string id)
+        {
+            await _client.DeleteAsync("categories/" + id);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> UpdateCategory(string id)
+        {
+            var values = await _client.GetFromJsonAsync<UpdateCategoryDto>("categories/"+id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
+        {
+            await _client.PutAsJsonAsync("categories", updateCategoryDto);
+            return RedirectToAction("Index");
+        }
     }
 }

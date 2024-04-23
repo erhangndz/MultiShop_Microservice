@@ -1,6 +1,6 @@
-﻿@model CreateCategoryDto
+﻿@model UpdateCategoryDto
 @{
-    ViewData["Title"] = "Yeni Kategori Oluştur";
+    ViewData["Title"] = "Kategori Güncelleme";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
@@ -9,11 +9,13 @@
         <div class="chart-box">
 
             <form method="post">
+                <input type="hidden" asp-for="Id" />
                 <label>Kategori Adı</label>
                 <input type="text" asp-for="CategoryName" class="form-control" />
                 <br>
-                <button class="btn btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+                <button class="btn btn-primary"><i class="fa fa-pencil"></i> Güncelle</button>
             </form>
         </div>
     </div>
 </div>
+

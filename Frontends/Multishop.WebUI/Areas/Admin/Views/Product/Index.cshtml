@@ -1,0 +1,54 @@
+﻿@model List<ResultProductDto>
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive">
+                @{
+                    int count = 0;
+                }
+                <thead>
+                    <tr>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Resim</th>
+                        <th class="sortable">Ürün Adı</th>
+                        <th class="sortable">Fiyat</th>
+                        <th class="sortable">Açıklama</th>
+                        <th class="sortable">Kategori</th>
+                        <th class="sortable">İşlemler</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
+                    <tr>
+                        <td class="text-truncate">@count</td>
+                        <td class="text-truncate"><img src="@item.ImageUrl" style="width:75px;height:75px;border-radius:50%" /></td>
+                        <td class="text-truncate">@item.ProductName</td>
+                        <td class="text-truncate">@item.Price ₺</td>
+                        <td class="text-truncate">@item.Description</td>
+                        <td class="text-truncate">@item.CategoryId</td>
+                        
+                        <td class="text-truncate">
+                            <a class="btn btn-danger" asp-action="DeleteProduct" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
+                            <a class="btn btn-info" asp-action="UpdateProduct" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <a class="btn btn-primary" asp-action="CreateProduct" asp-controller="Product" asp-area="Admin">Yeni Ürün Ekle</a>
+        </div>
+    </div>
+</div>
