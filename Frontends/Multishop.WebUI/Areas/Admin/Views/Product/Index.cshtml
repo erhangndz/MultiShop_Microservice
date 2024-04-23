@@ -41,14 +41,14 @@
                         <td class="text-truncate">@item.CategoryId</td>
                         
                         <td class="text-truncate">
-                            <a class="btn btn-danger" asp-action="DeleteProduct" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
-                            <a class="btn btn-info" asp-action="UpdateProduct" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
+                            <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteProduct" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
+                            <a class="btn btn-outline btn-rounded btn-info" asp-action="UpdateProduct" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
                         </td>
                     </tr>
                 }
 
             </table>
-            <a class="btn btn-primary" asp-action="CreateProduct" asp-controller="Product" asp-area="Admin">Yeni Ürün Ekle</a>
+            <a class="btn btn-outline btn-rounded btn-primary" asp-action="CreateProduct" asp-controller="Product" asp-area="Admin">Yeni Ürün Ekle</a>
         </div>
     </div>
 </div>

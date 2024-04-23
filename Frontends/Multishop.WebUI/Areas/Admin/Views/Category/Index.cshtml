@@ -32,16 +32,16 @@
                 <tr>
                     <td class="text-truncate">@count</td>
                     <td class="text-truncate">@item.CategoryName</td>
-                    <td class="text-truncate"><a class="btn btn-success" asp-action="ProductsByCategory" asp-route-id="@item.Id">Ürünler</a></td>
+                        <td class="text-truncate"><a class="btn btn-outline btn-rounded btn-warning" asp-action="ProductsByCategory" asp-route-id="@item.Id">Ürünler</a></td>
                     <td class="text-truncate">
-                        <a class="btn btn-danger"  asp-action="DeleteCategory" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
-                            <a class="btn btn-info" asp-action="UpdateCategory" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
+                            <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteCategory" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
+                            <a class="btn btn-outline btn-rounded btn-info" asp-action="UpdateCategory" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
                     </td>
                 </tr>
                 }
                
             </table>
-           <a class="btn btn-primary" asp-action="CreateCategory" asp-controller="Category" asp-area="Admin">Yeni Kategori Ekle</a>
+            <a class="btn btn-outline btn-rounded btn-primary" asp-action="CreateCategory" asp-controller="Category" asp-area="Admin">Yeni Kategori Ekle</a>
         </div>
     </div>
 </div>

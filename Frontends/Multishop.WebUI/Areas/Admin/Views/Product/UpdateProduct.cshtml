@@ -1,6 +1,6 @@
-﻿@model CreateProductDto
+﻿@model UpdateProductDto
 @{
-    ViewData["Title"] = "Yeni Ürün Oluştur";
+    ViewData["Title"] = "Ürün Güncelleme";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
@@ -10,6 +10,7 @@
         <div class="chart-box">
 
             <form method="post">
+                <input type="hidden" asp-for="Id" />
                 <label>Ürün Adı</label>
                 <input type="text" asp-for="ProductName" class="form-control" />
                 <br>
@@ -25,9 +26,9 @@
                 <input type="text" asp-for="ImageUrl" class="form-control" />
                 <br>
                 <label>Açıklama</label>
-                <textarea type="text" asp-for="Description" class="form-control" rows="4" ></textarea>
+                <textarea type="text" asp-for="Description" class="form-control" rows="4"></textarea>
                 <br>
-                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-pencil"></i> Güncelle</button>
             </form>
         </div>
     </div>

@@ -51,8 +51,16 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public async Task<IActionResult> UpdateProduct(string id)
         {
+            var categoryList = await _client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
+            ViewBag.category = (from x in categoryList
+                                select new SelectListItem
+                                {
+                                    Text = x.CategoryName,
+                                    Value = x.CategoryName
+                                }).ToList();
             var values = await _client.GetFromJsonAsync<UpdateProductDto>("products/" + id);
             return View(values);
         }
