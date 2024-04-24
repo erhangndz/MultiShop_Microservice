@@ -26,7 +26,7 @@ namespace Multishop.Catalog.Services.FeatureSliderServices
           await _featureCollection.FindOneAndDeleteAsync(x=>x.Id==id);
         }
 
-        public async Task DontShowOnHome(string id)
+        public async Task DontShowOnHomeAsync(string id)
         {
             var value = await _featureCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
             value.IsShown = false;
@@ -43,7 +43,7 @@ namespace Multishop.Catalog.Services.FeatureSliderServices
             return await _featureCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task ShowOnHome(string id)
+        public async Task ShowOnHomeAsync(string id)
         {
            var value = await _featureCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
             value.IsShown = true;

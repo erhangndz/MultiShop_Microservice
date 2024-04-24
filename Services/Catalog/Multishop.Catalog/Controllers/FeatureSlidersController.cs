@@ -47,5 +47,20 @@ namespace Multishop.Catalog.Controllers
             await _featureSliderService.DeleteAsync(id);
             return Ok("Öne Çıkan Alan Silindi");
         }
+
+        [HttpGet("ShowOnHome/{id}")]
+        public async Task<IActionResult> ShowOnHome(string id)
+        {
+            await _featureSliderService.ShowOnHomeAsync(id);
+            return Ok();
+        }
+
+        [HttpGet("DontShowOnHome/{id}")]
+        public async Task<IActionResult> DontShowOnHome(string id)
+        {
+            await _featureSliderService.DontShowOnHomeAsync(id);
+            return Ok();
+        }
+
     }
 }
