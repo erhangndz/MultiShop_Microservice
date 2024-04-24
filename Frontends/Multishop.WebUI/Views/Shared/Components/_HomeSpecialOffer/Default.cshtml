@@ -2,20 +2,18 @@
 @model List<ResultSpecialOfferDto>
 
 <div class="col-lg-4">
-    <div class="product-offer mb-30" style="height: 200px;">
-        <img class="img-fluid" src="https://th.bing.com/th/id/OIP.0E2rT394d7tQ9MymGH8mTgHaE8?rs=1&pid=ImgDetMain" alt="">
-        <div class="offer-text">
-            <h6 class="text-white text-uppercase"> 20% İndirim</h6>
-            <h3 class="text-white mb-3">Özel Teklif</h3>
-            <a href="" class="btn btn-primary">Alışverişe Başla</a>
+    @foreach(var item in Model)
+    {
+        <div class="product-offer mb-30" style="height: 200px;">
+            <img class="img-fluid" src="@item.ImageUrl" alt="">
+            <div class="offer-text">
+                <h6 class="text-white text-uppercase"> @item.Title</h6>
+                <h3 class="text-white mb-3">@item.SubTitle</h3>
+                <a href="" class="btn btn-primary">Alışverişe Başla</a>
+            </div>
         </div>
-    </div>
-    <div class="product-offer mb-30" style="height: 200px;">
-        <img class="img-fluid" src="https://thumbs.dreamstime.com/b/surprised-young-woman-shopping-bags-light-background-151341216.jpg" alt="">
-        <div class="offer-text"> 
-            <h6 class="text-white text-uppercase"> 25% İndirim</h6>
-            <h3 class="text-white mb-3">Özel Teklif</h3>
-            <a href="" class="btn btn-primary">Alışverişe Başla</a> 
-        </div>
-    </div>
+
+    }
+    
+    
 </div>
