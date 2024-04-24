@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Multishop.Catalog.Services;
 using Multishop.Catalog.Services.CategoryServices;
+using Multishop.Catalog.Services.FeatureServicesServices;
 using Multishop.Catalog.Services.FeatureSliderServices;
 using Multishop.Catalog.Services.ProductDetailServices;
 using Multishop.Catalog.Services.ProductPhotoServices;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductPhotoService, ProductPhotoService>();
 builder.Services.AddScoped<IFeatureSliderService, FeatureSliderService>();
 builder.Services.AddScoped<ISpecialOfferService, SpecialOfferService>();
+builder.Services.AddScoped<IFeatureServiceService, FeatureServiceService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

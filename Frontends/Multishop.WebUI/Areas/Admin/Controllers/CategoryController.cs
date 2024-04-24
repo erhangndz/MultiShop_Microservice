@@ -18,10 +18,6 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var values = await _client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
-            if (values == null)
-            {
-                return View(new List<ResultCategoryDto>());
-            }
             return View(values);
         }
 

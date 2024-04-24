@@ -1,8 +1,9 @@
-﻿@model UpdateCategoryDto
+﻿@model UpdateFeatureServiceDto
 @{
-    ViewData["Title"] = "Kategori Güncelleme";
+    ViewData["Title"] = "Hizmet Güncelle";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
+
 
 <div class="row">
     <div class="col-md-12">
@@ -10,15 +11,14 @@
 
             <form method="post">
                 <input type="hidden" asp-for="Id" />
-                <label>Kategori Adı</label>
-                <input type="text" asp-for="CategoryName" class="form-control" />
+                 <label>Hizmet Adı</label>
+                <input type="text" asp-for="Title" class="form-control" />
                 <br>
-                <label>Görsel Url</label>
-                <input type="text" asp-for="ImageUrl" class="form-control" />
+                <label>İkon</label>
+                <input type="text" asp-for="Icon" class="form-control" />
                 <br>
                 <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-pencil"></i> Güncelle</button>
             </form>
         </div>
     </div>
 </div>
-
