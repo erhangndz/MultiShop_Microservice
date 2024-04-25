@@ -1,0 +1,51 @@
+﻿
+@model List<ResultOfferDiscountDto>
+@{
+    ViewData["Title"] = "İndirim Teklifleri";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive">
+                @{
+                    int count = 0;
+                }
+                <thead>
+                    <tr>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Resim</th>
+                        <th class="sortable">Başlık</th>
+                        <th class="sortable">Alt Başlık</th>
+                        <th class="sortable">İşlemler</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
+                    <tr>
+                        <td class="text-truncate">@count</td>
+                        <td class="text-truncate"><img src="@item.ImageUrl" style="width:75px;height:75px;border-radius:50%" /></td>
+                        <td class="text-truncate">@item.Title</td>
+                        <td class="text-truncate">@item.SubTitle</td>
+
+                        <td class="text-truncate">
+                            <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteOfferDiscount" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
+                            <a class="btn btn-outline btn-rounded btn-info" asp-action="UpdateOfferDiscount" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <a class="btn btn-outline btn-rounded btn-primary" asp-action="CreateOfferDiscount" asp-controller="OfferDiscount" asp-area="Admin">Yeni İndirim Teklifi Ekle</a>
+        </div>
+    </div>
+</div>

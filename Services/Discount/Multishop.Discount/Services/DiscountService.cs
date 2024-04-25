@@ -8,12 +8,12 @@ namespace Multishop.Discount.Services
     public class DiscountService(DiscountContext _context) : IDiscountService
     {
         private readonly IDbConnection _connection = _context.CreateConnection();
-        public async Task CreateCouponAsync(CreateCouponDto dto)
+        public async Task CreateCouponAsync(CreateCouponDto createCouponDto)
         {
             var query = $"insert into coupons (code,rate,IsActive,validdate) values (@Code,@Rate,@IsActive,@ValidDate)";
 
             var parameters = new DynamicParameters();
-            parameters.AddDynamicParams(dto);
+            parameters.AddDynamicParams(createCouponDto);
             await _connection.ExecuteAsync(query, parameters);
 
         }

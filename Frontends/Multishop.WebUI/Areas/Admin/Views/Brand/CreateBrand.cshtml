@@ -1,0 +1,23 @@
+﻿@model CreateBrandDto
+@{
+    ViewData["Title"] = "Yeni Marka Oluştur";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <form method="post">
+                <label>Marka Adı</label>
+                <input type="text" asp-for="BrandName" class="form-control" />
+                <br>
+                <label>Resim Url</label>
+                <input type="text" asp-for="ImageUrl" class="form-control" />
+                <br>
+                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
