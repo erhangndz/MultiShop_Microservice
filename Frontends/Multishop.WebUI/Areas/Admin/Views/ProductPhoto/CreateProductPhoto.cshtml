@@ -1,0 +1,25 @@
+﻿@model CreateProductPhotoDto
+@{
+    ViewData["Title"] = "Yeni Ürün Fotoğrafı Oluştur";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <form method="post">
+                <label>Ürün Adı</label>
+                <select asp-items="@ViewBag.products" asp-for="ProductId" class="form-control">
+                    <option>Ürünü Seçin</option>
+                </select>
+                <br />
+                <label>Resim Url</label>
+                <input type="text" asp-for="ImageUrl" class="form-control" />
+                <br>
+                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
