@@ -22,7 +22,7 @@
         </div>
         <!-- Shop Sidebar End -->
         <!-- Shop Product Start -->
-        @await Component.InvokeAsync("_ShopFilteredProductList")
+        @await Component.InvokeAsync("_ShopFilteredProductList",new{ id= ViewBag.id })
         <!-- Shop Product End -->
     </div>
 </div>

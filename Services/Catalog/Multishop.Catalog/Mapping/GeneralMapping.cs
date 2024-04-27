@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Multishop.Catalog.Dtos.AboutDtos;
 using Multishop.Catalog.Dtos.BrandDtos;
 using Multishop.Catalog.Dtos.CategoryDtos;
 using Multishop.Catalog.Dtos.FeatureServiceDtos;
@@ -56,6 +57,11 @@ namespace Multishop.Catalog.Mapping
             CreateMap<ResultBrandDto,Brand>().ReverseMap();
             CreateMap<CreateBrandDto,Brand>().ReverseMap();
             CreateMap<UpdateBrandDto,Brand>().ReverseMap();
+
+
+            CreateMap<ResultAboutDto,About>().ReverseMap();
+            CreateMap<CreateAboutDto,About>().ReverseMap();
+            CreateMap<UpdateAboutDto,About>().ReverseMap();
 
 
         }

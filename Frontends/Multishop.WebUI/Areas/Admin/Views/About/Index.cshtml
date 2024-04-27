@@ -1,0 +1,51 @@
+﻿@model List<ResultAboutDto>
+@{
+    ViewData["Title"] = "Hakkımızda";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive">
+                @{
+                    int count = 0;
+                }
+                <thead>
+                    <tr>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Adres</th>
+                        <th class="sortable">Email</th>
+                        <th class="sortable">Telefon</th>
+                        <th class="sortable">Açıklama</th>
+                        <th class="sortable">İşlemler</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
+                    <tr>
+                        <td class="text-truncate">@count</td>
+                       <td>@item.Address</td>
+                        <td class="text-truncate">@item.Email</td>
+                        <td class="text-truncate">@item.Phone</td>
+                        <td class="text-truncate">@(item.Description.Length>50 ? item.Description.Substring(0,50)+"...": item.Description)</td>
+                       
+                        <td class="text-truncate">
+                            <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteAbout" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
+                            <a class="btn btn-outline btn-rounded btn-info" asp-action="UpdateAbout" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <a class="btn btn-outline btn-rounded btn-primary" asp-action="CreateAbout" asp-controller="About" asp-area="Admin">Yeni Hakkımızda Ekle</a>
+        </div>
+    </div>
+</div>
