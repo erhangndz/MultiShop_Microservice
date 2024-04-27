@@ -9,9 +9,9 @@
 <!-- Shop Detail Start -->
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
-      @await Component.InvokeAsync("_ProductDetailCarousel")
+      @await Component.InvokeAsync("_ProductDetailCarousel",new{id=ViewBag.detail})
 
-      @await Component.InvokeAsync("_ProductDetailFeature")
+        @await Component.InvokeAsync("_ProductDetailFeature", new { id = ViewBag.detail })
 
     </div>
     <div class="row px-xl-5">
@@ -23,9 +23,9 @@
                     <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Değerlendirme (1)</a>
                 </div>
                 <div class="tab-content">
-                    @await Component.InvokeAsync("_ProductDetailDescription")
-                    @await Component.InvokeAsync("_ProductDetailInformation")
-                    @await Component.InvokeAsync("_ProductDetailReview")
+                    @await Component.InvokeAsync("_ProductDetailDescription", new { id = ViewBag.detail })
+                    @await Component.InvokeAsync("_ProductDetailInformation", new { id = ViewBag.detail })
+                    @await Component.InvokeAsync("_ProductDetailReview", new { id = ViewBag.detail })
                 </div>
             </div>
         </div>

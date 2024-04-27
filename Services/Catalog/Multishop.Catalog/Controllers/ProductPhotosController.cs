@@ -7,7 +7,7 @@ using Multishop.Catalog.Services.ProductPhotoServices;
 
 namespace Multishop.Catalog.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductPhotosController(IProductPhotoService _ProductPhotoService, IMapper _mapper) : ControllerBase
@@ -47,6 +47,13 @@ namespace Multishop.Catalog.Controllers
         {
             await _ProductPhotoService.DeleteAsync(id);
             return Ok("Ürün Fotoğrafı Silindi");
+        }
+
+        [HttpGet("GetPhotosByProductId/{id}")]
+        public async Task<IActionResult> GetPhotosByProductId(string id)
+        {
+            var values = await _ProductPhotoService.GetPhotosByProductId(id);
+            return Ok(values);
         }
     }
 }

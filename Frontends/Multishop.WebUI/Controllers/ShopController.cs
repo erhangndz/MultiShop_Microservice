@@ -10,8 +10,9 @@ namespace Multishop.WebUI.Controllers
             return View();
         }
 
-        public IActionResult ProductDetails()
+        public IActionResult ProductDetails(string id)
         {
+            ViewBag.detail = id;
             return View();
         }
     }
