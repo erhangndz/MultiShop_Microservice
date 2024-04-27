@@ -1,0 +1,27 @@
+﻿@model CreateProductDetailDto
+@{
+    ViewData["Title"] = "Yeni Ürün Detayı Oluştur";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <form method="post">
+                <label>Ürün Adı</label>
+                <select asp-items="@ViewBag.products" asp-for="ProductId" class="form-control">
+                    <option>Ürünü Seçin</option>
+                </select>
+                <br />
+                <label>Ürün Açıklaması</label>
+                <textarea type="text" asp-for="Description" class="form-control" rows="4" ></textarea>
+                <br>
+                <label>Ürün Bilgisi</label>
+                <textarea type="text" asp-for="Info" class="form-control" rows="4"></textarea>
+                <br>
+                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>

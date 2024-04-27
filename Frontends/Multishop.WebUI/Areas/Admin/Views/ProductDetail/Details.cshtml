@@ -1,0 +1,40 @@
+﻿
+@model ResultProductDetailDto
+@{
+    ViewData["Title"] = "Ürün Detayları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive">
+                @{
+                 
+                }
+                <thead>
+                    <tr>
+                  
+                        <th class="sortable">Açıklama</th>
+                        <td>@Model.Description</td>
+
+                    </tr>
+                    <tr>
+
+                        <th class="sortable">Bilgi</th>
+                        <td>@Model.Info</td>
+
+                    </tr>
+                </thead>
+               
+
+            </table>
+            <a class="btn btn-outline btn-rounded btn-primary" asp-action="CreateDetail" asp-controller="ProductDetail" asp-area="Admin">Yeni Detay Ekle</a>
+        </div>
+    </div>
+</div>
