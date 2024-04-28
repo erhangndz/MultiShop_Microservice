@@ -44,7 +44,8 @@
                             <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteProduct" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
                             <a class="btn btn-outline btn-rounded btn-info" asp-action="UpdateProduct" asp-route-id="@item.Id"><i class="fa fa-pencil"></i> Güncelle</a>
                                  <a class="btn btn-outline btn-rounded btn-success" asp-action="GetPhotosByProductId" asp-controller="ProductPhoto" asp-route-id="@item.Id"><i class="fa fa-image"></i> Ürün Fotoğrafları</a>
-                            <a class="btn btn-outline btn-rounded btn-warning" asp-action="Details" asp-controller="ProductDetail" asp-route-id="@item.Id"><i class="fa fa-info"></i> Detaylar</a>
+                            <a class="btn btn-outline btn-rounded btn-warning" asp-action="Details" asp-controller="ProductDetail" asp-route-id="@item.Id"><i class="fa fa-info"></i> Ürün Bilgisi</a>
+                            <a class="btn btn-outline btn-rounded btn-primary" asp-action="GetCommentsByProductId" asp-controller="Comment" asp-route-id="@item.Id"><i class="fa fa-comments"></i> Ürün Yorumları</a>
                         </td>
                     </tr>
                 }

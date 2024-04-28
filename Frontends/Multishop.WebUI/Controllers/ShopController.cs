@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp;
+using Multishop.WebDTO.DTOs.CommentDtos;
 
 namespace Multishop.WebUI.Controllers
 {
@@ -14,6 +16,15 @@ namespace Multishop.WebUI.Controllers
         {
             ViewBag.detail = id;
             return View();
+        }
+
+        public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto)
+        {
+            createCommentDto.CommentDate = DateTime.Now;
+            createCommentDto.Status = false;
+            var client = new HttpClient();
+            await client.PostAsJsonAsync("https://localhost:7016/api/comments", createCommentDto);
+            return RedirectToAction("Index");
         }
     }
 }

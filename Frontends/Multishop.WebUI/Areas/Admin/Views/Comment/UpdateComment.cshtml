@@ -1,0 +1,36 @@
+﻿@model UpdateCommentDto
+@{
+    ViewData["Title"] = "Yorum Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <form method="post">
+                <input type="hidden" asp-for="UserCommentId" />
+                <input type="hidden" asp-for="ProductId" />
+               <label>Ad Soyad</label>
+               <input type="text" asp-for="NameSurname" class="form-control" />
+               <br />
+                <label>Email</label>
+                <input type="email" asp-for="Email" class="form-control" />
+                <br />
+                <label>Resim Url</label>
+                <input type="text" asp-for="ImageUrl" class="form-control" />
+                <br />
+                <label>Ürün Puanı</label>
+                <input type="text" asp-for="Rating" class="form-control" />
+                <br />
+                <label>Ürün Yorumu</label>
+                <textarea type="text" asp-for="Comment" class="form-control" rows="4"></textarea>
+                <br>
+                
+                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-pencil"></i> Güncelle</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,6 @@ namespace Multishop.Catalog.Services.ProductDetailServices
     public interface IProductDetailService : IRepository<ProductDetail>
     {
 
-        Task<ResultProductDetailDto> GetDetailsByProductIdAsync(string id);
+        Task<List<ResultProductDetailDto>> GetDetailsByProductIdAsync(string id);
     }
 }

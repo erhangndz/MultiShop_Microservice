@@ -18,10 +18,10 @@ namespace Multishop.Catalog.Services.ProductDetailServices
             _mapper = mapper;
         }
 
-        public async Task<ResultProductDetailDto> GetDetailsByProductIdAsync(string id)
+        public async Task<List<ResultProductDetailDto>> GetDetailsByProductIdAsync(string id)
         {
             var values = await _collection.Find(x => x.ProductId == id).ToListAsync();
-            return _mapper.Map<ResultProductDetailDto>(values);
+            return _mapper.Map<List<ResultProductDetailDto>>(values);
 
         }
     }

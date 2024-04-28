@@ -1,5 +1,5 @@
 ﻿
-@model ResultProductDetailDto
+@model List<ResultProductDetailDto>
 @{
     ViewData["Title"] = "Ürün Detayları";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -18,18 +18,23 @@
                  
                 }
                 <thead>
+                    @foreach (var item in Model)
+                    {
+                        
+                   
                     <tr>
                   
                         <th class="sortable">Açıklama</th>
-                        <td>@Model.Description</td>
+                        <td>@item.Description</td>
 
                     </tr>
                     <tr>
 
                         <th class="sortable">Bilgi</th>
-                        <td>@Model.Info</td>
+                        <td>@item.Info</td>
 
                     </tr>
+                    }
                 </thead>
                
 

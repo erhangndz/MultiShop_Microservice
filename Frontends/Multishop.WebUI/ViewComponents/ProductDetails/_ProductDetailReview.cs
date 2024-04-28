@@ -1,12 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Multishop.WebDTO.DTOs.CommentDtos;
 
 namespace Multishop.WebUI.ViewComponents.ProductDetails
 {
+
     public class _ProductDetailReview:ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly HttpClient _client;
+
+        public _ProductDetailReview(HttpClient client)
         {
-            return View();
+            client.BaseAddress = new Uri("https://localhost:7016/api/");
+            _client = client;
+        }
+        public async Task<IViewComponentResult> InvokeAsync(string id)
+        {
+            ViewBag.ProductId = id;
+            var values = await _client.GetFromJsonAsync<List<ResultCommentDto>>("comments/getByProductId/" + id);
+            return View(values);
         }
     }
 }

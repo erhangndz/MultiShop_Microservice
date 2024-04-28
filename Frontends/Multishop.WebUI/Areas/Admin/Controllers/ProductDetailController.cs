@@ -5,6 +5,8 @@ using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Route("[area]/[controller]/[action]/{id?}")]
     public class ProductDetailController : Controller
     {
         private readonly HttpClient _client;
@@ -16,7 +18,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         }
        public async Task<IActionResult> Details(string id)
         {
-            var values = await _client.GetFromJsonAsync<string>("productDetails/getDetailsByProductId" + id);
+            var values = await _client.GetFromJsonAsync<List<ResultProductDetailDto>>("productDetails/getDetailsByProductId/" + id);
             return View(values);
         }
 
@@ -38,6 +40,20 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> CreateDetail(CreateProductDetailDto createProductDetailDto)
         {
             await _client.PostAsJsonAsync("productDetails", createProductDetailDto);
+            return RedirectToAction("Index", "Product");
+        }
+
+        [HttpGet]
+        public  async Task<IActionResult> UpdateDetail(string id)
+        {
+            var values = await _client.GetFromJsonAsync<UpdateProductDetailDto>("productDetails/" + id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateDetail(UpdateProductDetailDto updateProductDetailDto)
+        {
+            await _client.PutAsJsonAsync("productDetails", updateProductDetailDto);
             return RedirectToAction("Index", "Product");
         }
     }

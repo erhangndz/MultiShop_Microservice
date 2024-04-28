@@ -1,0 +1,52 @@
+﻿@model List<ResultCommentDto>
+@{
+    ViewData["Title"] = "Ürün Yorumları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive">
+                @{
+                    int count = 0;
+                }
+                <thead>
+                    <tr>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Kullanıcı</th>
+                        <th class="sortable">Yorum</th>
+                        <th class="sortable">Tarih</th>
+                        <th class="sortable">Durum</th>
+                        <th class="sortable">İşlemler</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
+                    <tr>
+                        <td class="text-truncate">@count</td>
+                        <td class="text-truncate">@item.NameSurname</td>
+                        <td class="text-truncate">@item.Comment</td>
+                        <td class="text-truncate">@item.CommentDate.ToLongDateString()</td>
+                        <td class="text-truncate">@(item.Status ? "Aktif" : "Pasif")</td>
+
+                        <td class="text-truncate">
+                            <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteComment" asp-route-id="@item.UserCommentId"><i class="fa fa-trash"></i> Sil</a>
+                            <a class="btn btn-outline btn-rounded btn-info" asp-action="UpdateComment" asp-route-id="@item.UserCommentId"><i class="fa fa-pencil"></i> Güncelle</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>

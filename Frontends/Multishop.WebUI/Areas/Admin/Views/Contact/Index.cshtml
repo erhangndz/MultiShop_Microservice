@@ -1,0 +1,54 @@
+﻿@model List<ResultContactDto>
+@{
+    ViewData["Title"] = "Gelen Mesajlar";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive">
+                @{
+                    int count = 0;
+                }
+                <thead>
+                    <tr>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Gönderen</th>
+                        <th class="sortable">Email</th>
+                        <th class="sortable">Konu</th>
+                        <th class="sortable">Mesaj</th>
+                        <th class="sortable">Tarih</th>
+                        <th class="sortable">İşlemler</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
+                    <tr>
+                        <td class="text-truncate">@count</td>
+                        <td class="text-truncate">@item.NameSurname</td>
+                        <td class="text-truncate">@item.Email</td>
+                        <td class="text-truncate">@item.Subject</td>
+                        <td class="text-truncate">@item.Message</td>
+                        <td class="text-truncate">@item.SendDate.ToLongDateString()</td>
+                       
+                        <td class="text-truncate">
+                            <a class="btn btn-outline btn-rounded btn-danger" asp-action="DeleteContact" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Sil</a>
+                           
+                        </td>
+                    </tr>
+                }
+
+            </table>
+          
+        </div>
+    </div>
+</div>
+

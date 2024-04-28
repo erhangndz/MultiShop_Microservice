@@ -4,6 +4,7 @@ using Multishop.Catalog.Services;
 using Multishop.Catalog.Services.AboutServices;
 using Multishop.Catalog.Services.BrandServices;
 using Multishop.Catalog.Services.CategoryServices;
+using Multishop.Catalog.Services.ContactServices;
 using Multishop.Catalog.Services.FeatureServicesServices;
 using Multishop.Catalog.Services.FeatureSliderServices;
 using Multishop.Catalog.Services.OfferDiscountServices;
@@ -39,6 +40,7 @@ builder.Services.AddScoped<IFeatureServiceService, FeatureServiceService>();
 builder.Services.AddScoped<IOfferDiscountService, OfferDiscountService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IAboutService, AboutService>();
+builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
