@@ -62,7 +62,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multishop.WebDTO", "Fronten
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comment", "Comment", "{CD69A83A-3A51-41B0-9829-D800806AD90F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multishop.Comment", "Services\Comment\Multishop.Comment\Multishop.Comment.csproj", "{C66D3ECC-49EF-4212-B84B-BA505AA76AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multishop.Comment", "Services\Comment\Multishop.Comment\Multishop.Comment.csproj", "{C66D3ECC-49EF-4212-B84B-BA505AA76AD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
