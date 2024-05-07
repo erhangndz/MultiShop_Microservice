@@ -7,7 +7,7 @@ using Multishop.Catalog.Services.ProductServices;
 
 namespace Multishop.Catalog.Controllers
 {
-    //[Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController(IProductService _productService, IMapper _mapper) : ControllerBase

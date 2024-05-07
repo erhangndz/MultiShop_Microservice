@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Multishop.WebUI.Services;
+using Multishop.WebUI.Services.Concrete;
+using Multishop.WebUI.Services.Interfaces;
+using Multishop.WebUI.Settings;
+using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +20,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
     opt.Cookie.Name = "MultishopJwt";
 });
 
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+{
+    opt.LoginPath = "/Login/Index";
+    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+    opt.Cookie.Name = "MultishopCookie";
+    opt.SlidingExpiration = true;
+});
+
+
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 
 
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
 
 var app = builder.Build();
 

@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.IdentityDtos;
 using Multishop.WebUI.Models;
 using Multishop.WebUI.Services;
+using Multishop.WebUI.Services.Interfaces;
 using NuGet.DependencyResolver;
 using NuGet.Protocol;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
@@ -17,11 +19,13 @@ namespace Multishop.WebUI.Controllers
     {
         private readonly HttpClient _client;
         private readonly ILoginService _loginService;
-        public LoginController(HttpClient client, ILoginService loginService)
+        private readonly IIdentityService _identityService;
+        public LoginController(HttpClient client, ILoginService loginService, IIdentityService identityService)
         {
             client.BaseAddress = new Uri("https://localhost:5001/api/");
             _client = client;
             _loginService = loginService;
+            _identityService = identityService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -69,6 +73,22 @@ namespace Multishop.WebUI.Controllers
             }
             ModelState.AddModelError("", "Kullanıcı adı veya şifre yanlış");
             return View();
+        }
+
+
+        //[HttpGet]
+        //public IActionResult SignIn()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        public async Task<IActionResult> SignIn(SignInDto signInDto)
+        {
+            signInDto.UserName = "Ali01";
+            signInDto.Password = "Password12*";
+                await _identityService.SignIn(signInDto);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
