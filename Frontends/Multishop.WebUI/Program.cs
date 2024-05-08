@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
+using Multishop.WebUI.Handlers;
+using Multishop.WebUI.Services.CatalogServices.CategoryServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
@@ -29,13 +31,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     opt.SlidingExpiration = true;
 });
 
-
+builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
 builder.Services.AddHttpClient<IUserService,UserService>(o =>
 {
-    var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+    o.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
-    o.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}");
-});
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>(o =>
+{
+    o.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(o =>
+{
+    o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 
 builder.Services.AddHttpContextAccessor();

@@ -5,12 +5,13 @@ using Multishop.WebUI.Settings;
 
 namespace Multishop.WebUI.Services.Concrete
 {
-    public class UserService(HttpClient _client, IOptions<ServiceApiSettings> _serviceApiSettings) : IUserService
+    public class UserService(HttpClient _client) : IUserService
     {
         
         public async Task<UserDetailViewModel> GetUserInfo()
         {
-            return await _client.GetFromJsonAsync<UserDetailViewModel>("api/user/GetUserInfo");
+            return await _client.GetFromJsonAsync<UserDetailViewModel>("/api/users/GetUserInfo");
+          
         }
     }
 }
