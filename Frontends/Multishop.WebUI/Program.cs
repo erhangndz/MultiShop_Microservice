@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Multishop.WebUI.Services;
+using Microsoft.Extensions.Options;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
@@ -29,6 +29,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     opt.SlidingExpiration = true;
 });
 
+
+builder.Services.AddHttpClient<IUserService,UserService>(o =>
+{
+    var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
+    o.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}");
+});
 
 
 builder.Services.AddHttpContextAccessor();

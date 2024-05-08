@@ -25,6 +25,63 @@ namespace Multishop.WebUI.Services.Concrete
             _serviceApiSettings = serviceApiSettings.Value;
         }
 
+        public async Task<bool> GetRefreshToken()
+        {
+            var discoveryEndpoint = await _client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = _serviceApiSettings.IdentityServerUrl
+            });
+
+           
+
+
+            var refreshToken = await _contextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+            var refreshTokenRequest = new RefreshTokenRequest
+            {
+                ClientId = _clientSettings.MultishopManagerClient.ClientId,
+                ClientSecret = _clientSettings.MultishopManagerClient.ClientSecret,
+                RefreshToken = refreshToken,
+                Address = discoveryEndpoint.TokenEndpoint
+            };
+
+            var token = await _client.RequestRefreshTokenAsync(refreshTokenRequest);
+
+            var authenticationToken = new List<AuthenticationToken>
+           {
+               new AuthenticationToken
+                {
+                    Name= OpenIdConnectParameterNames.AccessToken,
+                    Value= token.AccessToken
+                },
+                new AuthenticationToken
+                {
+                    Name=OpenIdConnectParameterNames.RefreshToken,
+                    Value= token.RefreshToken
+                },
+
+                new AuthenticationToken
+                {
+                    Name= OpenIdConnectParameterNames.ExpiresIn,
+                    Value= DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
+                }
+           };
+
+            var result = await _contextAccessor.HttpContext.AuthenticateAsync();
+            if (result.Succeeded)
+            {
+                var properties = result.Properties;
+                properties.StoreTokens(authenticationToken);
+
+                await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, result.Principal, properties);
+
+                return true;
+            }
+
+           
+            return false;
+        }
+
         public async Task<bool> SignIn(SignInDto signInDto)
         {
             var discoveryEndpoint = await _client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest

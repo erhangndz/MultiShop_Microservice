@@ -1,4 +1,4 @@
-﻿namespace Multishop.WebUI.Services
+﻿namespace Multishop.WebUI.Services.Interfaces
 {
     public interface ILoginService
     {

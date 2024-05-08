@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.IdentityDtos;
 using Multishop.WebUI.Models;
-using Multishop.WebUI.Services;
 using Multishop.WebUI.Services.Interfaces;
 using NuGet.DependencyResolver;
 using NuGet.Protocol;
