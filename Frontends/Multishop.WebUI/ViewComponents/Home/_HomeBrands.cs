@@ -9,6 +9,7 @@ namespace Multishop.WebUI.ViewComponents.Home
     {
         private readonly HttpClient _client;
 
+
         public _HomeBrands(HttpClient client)
         {
             client.BaseAddress = new Uri("https://localhost:7060/api/");

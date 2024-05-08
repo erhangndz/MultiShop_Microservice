@@ -41,6 +41,8 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
+builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
+
 
 var app = builder.Build();
 

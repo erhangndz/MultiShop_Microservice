@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Multishop.WebDTO.DTOs.CatalogDtos.CategoryDtos;
 using Multishop.WebUI.Settings;
 using Newtonsoft.Json.Linq;
@@ -10,13 +11,16 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly HttpClient _client;
+        private readonly ServiceApiSettings _serviceApiSettings;
 
-        public CategoryController(HttpClient client)
+        public CategoryController(HttpClient client, IOptions<ServiceApiSettings> serviceApiSettings)
         {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
+            _serviceApiSettings = serviceApiSettings.Value;
+            client.BaseAddress = new Uri(_serviceApiSettings.GatewayUrl+_serviceApiSettings.Catalog.Path);
             var token = VisitorToken.CreateToken();
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             _client = client;
+            
         }
 
         public async Task<IActionResult> Index()
