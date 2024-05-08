@@ -1,0 +1,6 @@
+@Multishop.Payment_HostAddress = http://localhost:5193
+
+GET {{Multishop.Payment_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

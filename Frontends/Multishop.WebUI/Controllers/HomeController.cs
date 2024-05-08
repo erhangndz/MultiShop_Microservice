@@ -3,9 +3,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Multishop.WebUI.Controllers
 {
-    public class HomeController(HttpClient _client) : Controller
+    public class HomeController: Controller
     {
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             
 

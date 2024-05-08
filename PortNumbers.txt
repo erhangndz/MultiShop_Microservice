@@ -1,3 +1,4 @@
+Gateway  => https://localhost:5000
 Catalog  => https://localhost:7060
 Discount => https://localhost:7071
 Order    => https://localhost:7072
@@ -5,3 +6,5 @@ Cargo    => https://localhost:7073
 Basket   => https://localhost:7074
 Identity => https://localhost:5001
 Comment  => https://localhost:7016
+Payment  => https://localhost:7027
+Images  => https://localhost:7275
