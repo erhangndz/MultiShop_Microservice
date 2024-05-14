@@ -2,36 +2,32 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductPhotoDtos;
+using Multishop.WebUI.Services.CatalogServices.ProductPhotoServices;
+using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class ProductPhotoController : Controller
+    public class ProductPhotoController(IProductPhotoService _productPhotoService, IProductService _productService) : Controller
     {
-        private readonly HttpClient _client;
-
-        public ProductPhotoController(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            _client = client;
-        }
+      
         public async Task<IActionResult> Index()
         {
-            var values = await _client.GetFromJsonAsync<List<ResultProductPhotoDto>>("productPhotos");
+            var values = await _productPhotoService.GetAllProductPhotosAsync();
             return View(values);
         }
 
         public async Task<IActionResult> GetPhotosByProductId(string id)
         {
-            var values = await _client.GetFromJsonAsync<List<ResultProductPhotoDto>>("productphotos/getPhotosByProductId/" + id);
+            var values =await _productPhotoService.GetPhotosByProductIdAsync(id);
             return View(values);
         }
 
         [HttpGet]
         public async Task<IActionResult> CreateProductPhoto()
         {
-            var productList = await _client.GetFromJsonAsync<List<ResultProductDto>>("products");
+            var productList = await _productService.GetAllProductsAsync();
             ViewBag.products = (from x in productList
                                 select new SelectListItem
                                 {
@@ -45,26 +41,26 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProductPhoto(CreateProductPhotoDto createProductPhotoDto)
         {
-            await _client.PostAsJsonAsync("productPhotos", createProductPhotoDto);
+            await _productPhotoService.CreateProductPhotoAsync(createProductPhotoDto);
             return RedirectToAction("Index","Product");
         }
 
         public async Task<IActionResult> DeleteProductPhoto(string id)
         {
-            await _client.DeleteAsync("productPhotos/" + id);
+            await _productPhotoService.DeleteProductPhotoAsync(id);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> UpdateProductPhoto(string id)
         {
-            var values = await _client.GetFromJsonAsync<UpdateProductPhotoDto>("productPhotos/" + id);
+            var values = await _productPhotoService.GetProductPhotoByIdAsync(id);
             return View(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateProductPhoto(UpdateProductPhotoDto updateProductPhotoDto)
         {
-            await _client.PutAsJsonAsync("productPhotos", updateProductPhotoDto);
+            await _productPhotoService.UpdateProductPhotoAsync(updateProductPhotoDto);
             return RedirectToAction("Index","Product");
         }
     }

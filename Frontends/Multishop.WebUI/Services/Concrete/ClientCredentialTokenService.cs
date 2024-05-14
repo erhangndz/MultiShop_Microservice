@@ -13,7 +13,7 @@ namespace Multishop.WebUI.Services.Concrete
 
         public async Task<string> GetToken()
         {
-            var currentToken = await _clientAccessTokenCache.GetAsync(_clientSettings.Value.MultishopVisitorClient.ToString());
+            var currentToken = await _clientAccessTokenCache.GetAsync("MultishopJwt");
             
             if(currentToken != null)
             {
@@ -34,7 +34,7 @@ namespace Multishop.WebUI.Services.Concrete
 
             var newToken = await _client.RequestClientCredentialsTokenAsync(clientCredentialTokenRequest);
 
-            await _clientAccessTokenCache.SetAsync(_clientSettings.Value.MultishopVisitorClient.ToString(), newToken.AccessToken,newToken.ExpiresIn);
+            await _clientAccessTokenCache.SetAsync("MultishopJwt", newToken.AccessToken,newToken.ExpiresIn);
 
             return newToken.AccessToken;
 

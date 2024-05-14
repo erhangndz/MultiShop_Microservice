@@ -1,6 +1,6 @@
 ﻿using Multishop.WebDTO.DTOs.CatalogDtos.ProductDetailDtos;
 
-namespace Multishop.WebUI.Services.CatalogServices
+namespace Multishop.WebUI.Services.CatalogServices.ProductDetailServices
 {
     public class ProductDetailService(HttpClient _client) : IProductDetailService
     {
@@ -21,7 +21,7 @@ namespace Multishop.WebUI.Services.CatalogServices
 
         public async Task<List<ResultProductDetailDto>> GetDetails(string id)
         {
-           return await _client.GetFromJsonAsync<List<ResultProductDetailDto>>("productDetails/getDetailsByProductId/" + id);
+            return await _client.GetFromJsonAsync<List<ResultProductDetailDto>>("productDetails/getDetailsByProductId/" + id);
         }
 
         public async Task<UpdateProductDetailDto> GetProductDetailByIdAsync(string id)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.IdentityDtos;
 using Multishop.WebUI.Models;
@@ -13,6 +14,7 @@ using System.Text.Json;
 
 namespace Multishop.WebUI.Controllers
 {
+    [AllowAnonymous]
     [Route("[controller]/[action]/{id?}")]
     public class LoginController : Controller
     {

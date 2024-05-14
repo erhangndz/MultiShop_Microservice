@@ -12,6 +12,6 @@ namespace Multishop.WebUI.Services.Concrete
             _contextAccessor = contextAccessor;
         }
 
-        public string GetUserId => _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        public string GetUserId => _contextAccessor.HttpContext.User.FindFirst("sub").Value;
     }
 }

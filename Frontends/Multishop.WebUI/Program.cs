@@ -1,6 +1,7 @@
 using IdentityModel.AspNetCore.AccessTokenManagement;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 using Multishop.WebUI.Extensions;
 using Multishop.WebUI.Handlers;
@@ -8,12 +9,13 @@ using Multishop.WebUI.Services.CatalogServices.CategoryServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
     opt.LoginPath = "/Login/Index";
@@ -25,13 +27,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
 });
 
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
-{
-    opt.LoginPath = "/Login/Index";
-    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
-    opt.Cookie.Name = "MultishopCookie";
-    opt.SlidingExpiration = true;
-});
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+//{
+//    opt.LoginPath = "/Login/Index";
+//    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+//    opt.Cookie.Name = "MultishopCookie";
+//    opt.SlidingExpiration = true;
+//});
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
@@ -50,7 +52,10 @@ builder.Services.AddHttpClient();
 
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(o =>
+{
+    o.Filters.Add(new AuthorizeFilter());
+});
 
 
 

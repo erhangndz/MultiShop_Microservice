@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDetailDtos;
-using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
-using Multishop.WebUI.Services.CatalogServices;
+using Multishop.WebUI.Services.CatalogServices.ProductDetailServices;
 using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
@@ -14,7 +13,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         
        public async Task<IActionResult> Details(string id)
         {
-            var values = await _client.GetFromJsonAsync<List<ResultProductDetailDto>>("productDetails/getDetailsByProductId/" + id);
+            var values = await _productDetailService.GetDetails(id);
             return View(values);
         }
 
