@@ -1,6 +1,8 @@
+using IdentityModel.AspNetCore.AccessTokenManagement;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
+using Multishop.WebUI.Extensions;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
 using Multishop.WebUI.Services.Concrete;
@@ -31,36 +33,27 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     opt.SlidingExpiration = true;
 });
 
+builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
+builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
+
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 builder.Services.AddScoped<ClientCredentialTokenHandler>();
-var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
-builder.Services.AddHttpClient<IUserService,UserService>(o =>
-{
-    o.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
-}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddAccessTokenManagement();
+builder.Services.AddHttpClientServices(builder.Configuration);
 
-builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>(o =>
-{
-    o.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
-}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<ICategoryService, CategoryService>(o =>
-{
-    o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
-}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 
 
-builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+
+
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
-builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
+
 
 
 var app = builder.Build();

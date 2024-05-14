@@ -52,5 +52,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
            await _categoryService.UpdateCategoryAsync(updateCategoryDto);
             return RedirectToAction("Index");
         }
+
+        
     }
 }

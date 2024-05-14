@@ -2,31 +2,27 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.WebDTO.DTOs.CatalogDtos.CategoryDtos;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
+using Multishop.WebUI.Services.CatalogServices.CategoryServices;
+using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class ProductController : Controller
+    public class ProductController(IProductService _productService,ICategoryService _categoryService) : Controller
     {
-        private readonly HttpClient _client;
-
-        public ProductController(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            _client = client;
-        }
+       
         public async Task<IActionResult> Index()
         {
-            var values = await _client.GetFromJsonAsync<List<ResultProductDto>>("products");
+            var values = await _productService.GetAllProductsAsync();
             return View(values);
         }
 
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
         {
-            var categoryList = await _client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
+            var categoryList = await _categoryService.GetAllCategoriesAsync();
             ViewBag.category = (from x in categoryList
                                 select new SelectListItem
                                 {
@@ -41,34 +37,34 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         {
             
 
-            await _client.PostAsJsonAsync("products", createProductDto);
+            await _productService.CreateProductAsync(createProductDto);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> DeleteProduct(string id)
         {
-            await _client.DeleteAsync("products/" + id);
+            await _productService.DeleteProductAsync(id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(string id)
         {
-            var categoryList = await _client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
+            var categoryList = await _categoryService.GetAllCategoriesAsync();
             ViewBag.category = (from x in categoryList
                                 select new SelectListItem
                                 {
                                     Text = x.CategoryName,
                                     Value = x.CategoryName
                                 }).ToList();
-            var values = await _client.GetFromJsonAsync<UpdateProductDto>("products/" + id);
+            var values = await _productService.GetProductByIdAsync(id);
             return View(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
-            await _client.PutAsJsonAsync("products", updateProductDto);
+            await _productService.UpdateProductAsync(updateProductDto);
             return RedirectToAction("Index");
         }
     }

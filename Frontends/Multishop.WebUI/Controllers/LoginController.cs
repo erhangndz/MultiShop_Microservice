@@ -75,19 +75,6 @@ namespace Multishop.WebUI.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult SignIn()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        public async Task<IActionResult> SignIn(SignInDto signInDto)
-        {
-            signInDto.UserName = "Ali01";
-            signInDto.Password = "Password12*";
-           await _identityService.SignIn(signInDto);
-            return RedirectToAction("Index", "User");
-        }
+    
     }
 }

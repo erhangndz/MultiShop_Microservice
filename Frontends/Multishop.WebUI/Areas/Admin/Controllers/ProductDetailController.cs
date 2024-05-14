@@ -2,20 +2,16 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDetailDtos;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
+using Multishop.WebUI.Services.CatalogServices;
+using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class ProductDetailController : Controller
+    public class ProductDetailController(IProductDetailService _productDetailService,IProductService _productService) : Controller
     {
-        private readonly HttpClient _client;
-
-        public ProductDetailController(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            _client = client;
-        }
+        
        public async Task<IActionResult> Details(string id)
         {
             var values = await _client.GetFromJsonAsync<List<ResultProductDetailDto>>("productDetails/getDetailsByProductId/" + id);
@@ -26,7 +22,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> CreateDetail()
         {
 
-            var productList = await _client.GetFromJsonAsync<List<ResultProductDto>>("products");
+            var productList = await _productService.GetAllProductsAsync();
             ViewBag.products = (from x in productList
                                 select new SelectListItem
                                 {
@@ -39,21 +35,21 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDetail(CreateProductDetailDto createProductDetailDto)
         {
-            await _client.PostAsJsonAsync("productDetails", createProductDetailDto);
+            await _productDetailService.CreateProductDetailAsync(createProductDetailDto);
             return RedirectToAction("Index", "Product");
         }
 
         [HttpGet]
         public  async Task<IActionResult> UpdateDetail(string id)
         {
-            var values = await _client.GetFromJsonAsync<UpdateProductDetailDto>("productDetails/" + id);
+            var values = await _productDetailService.GetProductDetailByIdAsync(id);
             return View(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateDetail(UpdateProductDetailDto updateProductDetailDto)
         {
-            await _client.PutAsJsonAsync("productDetails", updateProductDetailDto);
+            await _productDetailService.UpdateProductDetailAsync(updateProductDetailDto);
             return RedirectToAction("Index", "Product");
         }
     }
