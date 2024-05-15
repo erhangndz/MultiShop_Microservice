@@ -15,7 +15,7 @@ using System.Security.Principal;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
     opt.LoginPath = "/Login/Index";

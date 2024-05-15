@@ -11,10 +11,10 @@ namespace Multishop.Basket.Controllers
     public class BasketsController(IBasketService basketService, ILoginService loginService) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetBasketDetail()
+        public async Task<IActionResult> GetBasketDetail(string id)
         {
-            
-            var values = await basketService.GetBasketAsync(loginService.GetUserId);
+            id = loginService.GetUserId;
+            var values = await basketService.GetBasketAsync(id);
             return Ok(values);
         }
 
@@ -26,10 +26,11 @@ namespace Multishop.Basket.Controllers
             return Ok("Sepetteki Değişiklikler Kaydedildi");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteBasket()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBasket(string id)
         {
-            await basketService.DeleteBasketAsync(loginService.GetUserId);
+        id=loginService.GetUserId;
+            await basketService.DeleteBasketAsync(id);
             return Ok("Sepet Silindi");
         }
 

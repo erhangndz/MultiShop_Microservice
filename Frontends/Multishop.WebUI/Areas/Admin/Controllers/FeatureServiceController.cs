@@ -35,7 +35,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> UpdateFeatureService(string id)
         {
-            var values = _featureServiceService.GetFeatureServiceByIdAsync(id);
+            var values = await _featureServiceService.GetFeatureServiceByIdAsync(id);
             return View(values);
         }
 

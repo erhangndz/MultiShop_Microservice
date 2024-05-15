@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Multishop.WebUI.Handlers;
+using Multishop.WebUI.Services.BasketServices;
 using Multishop.WebUI.Services.CatalogServices.AboutServices;
 using Multishop.WebUI.Services.CatalogServices.BrandServices;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
@@ -97,6 +98,11 @@ namespace Multishop.WebUI.Extensions
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Comment.Path);
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IBasketService, BasketService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Basket.Path);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
         }
 
