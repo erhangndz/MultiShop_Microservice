@@ -101,20 +101,26 @@ namespace Multishop.WebUI.Services.Concrete
 
             var token = await _client.RequestPasswordTokenAsync(passwordTokenRequest);
 
-            var userInfoRequest = new UserInfoRequest
+            if (token.AccessToken == null)
             {
-                Address = discoveryEndpoint.UserInfoEndpoint,
-                Token = token.AccessToken
-            };
+                return false;
+            }
+            else
+            {
+                var userInfoRequest = new UserInfoRequest
+                {
+                    Address = discoveryEndpoint.UserInfoEndpoint,
+                    Token = token.AccessToken
+                };
 
-            var userValues = await _client.GetUserInfoAsync(userInfoRequest);
+                var userValues = await _client.GetUserInfoAsync(userInfoRequest);
 
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(userValues.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
-            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(userValues.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-            var authenticationProperties = new AuthenticationProperties();
+                var authenticationProperties = new AuthenticationProperties();
 
-            authenticationProperties.StoreTokens(new List<AuthenticationToken>(){
+                authenticationProperties.StoreTokens(new List<AuthenticationToken>(){
                 new AuthenticationToken
                 {
                     Name= OpenIdConnectParameterNames.AccessToken,
@@ -133,11 +139,14 @@ namespace Multishop.WebUI.Services.Concrete
                 }
             });
 
-            authenticationProperties.IsPersistent = false;
+                authenticationProperties.IsPersistent = false;
 
-            await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal,authenticationProperties);
+                await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
 
-            return true;
+                return true;
+            }
+
+            
         }
     }
 }

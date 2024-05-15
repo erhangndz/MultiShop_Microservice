@@ -3,7 +3,7 @@ using Multishop.WebUI.Services.Interfaces;
 
 namespace Multishop.WebUI.Services.BasketServices
 {
-    public class BasketService(HttpClient _client,ILoginService _loginService) : IBasketService
+    public class BasketService(HttpClient _client) : IBasketService
     {
         public async Task AddBasketItemAsync(BasketItemDto basketItemDto)
         {
@@ -17,8 +17,9 @@ namespace Multishop.WebUI.Services.BasketServices
 
                 else
                 {
-                    values=new BasketTotalDto();
-                    values.BasketItems.Add(basketItemDto);
+                   var existItem= values.BasketItems.FirstOrDefault(x => x.ProductId == basketItemDto.ProductId);
+                    existItem.Quantity += 1;
+                    
                 }
             }
 
@@ -29,19 +30,24 @@ namespace Multishop.WebUI.Services.BasketServices
         public async Task DeleteBasketAsync()
         {
             
-            await _client.DeleteAsync("baskets/" + _loginService.GetUserId);
+            await _client.DeleteAsync("baskets");
         }
 
         public async Task<BasketTotalDto> GetBasketAsync()
         {
        
-            return await _client.GetFromJsonAsync<BasketTotalDto>("baskets/" + _loginService.GetUserId);
+            return await _client.GetFromJsonAsync<BasketTotalDto>("baskets");
         }
 
         public async Task<bool> RemoveBasketItemAsync(string productId)
         {
             var values = await GetBasketAsync();
             var deletedItem = values.BasketItems.FirstOrDefault(x=>x.ProductId==productId);
+            if (deletedItem.Quantity > 1)
+            {
+                deletedItem.Quantity -= 1;
+                await SaveBasketAsync(values);
+            }
             var result = values.BasketItems.Remove(deletedItem);
              await SaveBasketAsync(values);
             return true;

@@ -1,16 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.IdentityDtos;
-using Multishop.WebUI.Models;
 using Multishop.WebUI.Services.Interfaces;
-using NuGet.DependencyResolver;
-using NuGet.Protocol;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text.Json;
 
 namespace Multishop.WebUI.Controllers
 {
@@ -35,43 +26,18 @@ namespace Multishop.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(LoginDto loginDto)
+        public async Task<IActionResult> Index(SignInDto signInDto, string? returnUrl)
         {
-            var result = await _client.PostAsJsonAsync("logins", loginDto);
-            if (result.IsSuccessStatusCode)
+            var result = await _identityService.SignIn(signInDto);
+            if (result == true)
             {
-                var id = _loginService.GetUserId;
-                var tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(await result.Content.ReadAsStringAsync(), new JsonSerializerOptions
+                if (returnUrl != null)
                 {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                if (tokenModel != null)
-                {
-                    JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-                    var token = handler.ReadJwtToken(tokenModel.Token);
-                    var claims = token.Claims.ToList();
-
-                    if (tokenModel.Token != null)
-                    {
-                        claims.Add(new Claim("multishoptoken", tokenModel.Token));
-                        var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
-                        var authProps = new AuthenticationProperties
-                        {
-                            ExpiresUtc = tokenModel.ExpireDate,
-                            IsPersistent = true
-                        };
-
-                        await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
-                        return RedirectToAction("Index", "Home");
-
-                    }
-
-
+                    return Redirect(returnUrl);
                 }
-
-                return View();
+                return RedirectToAction("Index", "Home");
             }
+
             ModelState.AddModelError("", "Kullanıcı adı veya şifre yanlış");
             return View();
         }

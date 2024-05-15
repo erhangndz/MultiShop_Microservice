@@ -27,13 +27,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
 });
 
 
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
-//{
-//    opt.LoginPath = "/Login/Index";
-//    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
-//    opt.Cookie.Name = "MultishopCookie";
-//    opt.SlidingExpiration = true;
-//});
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+{
+    opt.LoginPath = "/Login/Index";
+    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+    opt.Cookie.Name = "MultishopCookie";
+    opt.SlidingExpiration = true;
+});
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
