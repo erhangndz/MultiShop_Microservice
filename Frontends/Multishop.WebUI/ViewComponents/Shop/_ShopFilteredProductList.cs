@@ -1,29 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
+using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.ViewComponents.Shop
 {
-    public class _ShopFilteredProductList : ViewComponent
+    public class _ShopFilteredProductList(IProductService _productService) : ViewComponent
     {
-        private readonly HttpClient _client;
-
-        public _ShopFilteredProductList(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            _client = client;
-        }
+        
         public async Task<IViewComponentResult> InvokeAsync(string id)
         {
             id = ViewBag.id;
 
             if (id == null)
             {
-                var values = await _client.GetFromJsonAsync<List<ResultProductDto>>("products");
+                var values = await _productService.GetAllProductsAsync();
                 return View(values);
             }
             else
             {
-                var values = await _client.GetFromJsonAsync<List<ResultProductDto>>("products/getProductsByCategoryId/" + id);
+                var values = await _productService.GetProductsByCategoryIdAsync(id);
                 return View(values);
             }
 

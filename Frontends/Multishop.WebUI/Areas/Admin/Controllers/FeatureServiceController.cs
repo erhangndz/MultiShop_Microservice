@@ -1,24 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.FeatureServiceDtos;
+using Multishop.WebUI.Services.CatalogServices.FeatureServiceServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class FeatureServiceController : Controller
+    public class FeatureServiceController(IFeatureServiceService _featureServiceService) : Controller
     {
-        private readonly HttpClient _client;
-
-        public FeatureServiceController(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            _client = client;
-        }
-       
-
+        
         public async Task<IActionResult> Index()
         {
-            var values = await _client.GetFromJsonAsync<List<ResultFeatureServiceDto>>("featureServices");
+            var values = await _featureServiceService.GetAllFeatureServicesAsync();
             return View(values);
         }
 
@@ -30,26 +23,26 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateFeatureService(CreateFeatureServiceDto createFeatureServiceDto)
         {
-            await _client.PostAsJsonAsync("featureServices", createFeatureServiceDto);
+            await _featureServiceService.CreateFeatureServiceAsync(createFeatureServiceDto);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> DeleteFeatureService(string id)
         {
-            await _client.DeleteAsync("featureServices/" + id);
+            await _featureServiceService.DeleteFeatureServiceAsync(id);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> UpdateFeatureService(string id)
         {
-            var values = await _client.GetFromJsonAsync<UpdateFeatureServiceDto>("featureServices/" + id);
+            var values = _featureServiceService.GetFeatureServiceByIdAsync(id);
             return View(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateFeatureService(UpdateFeatureServiceDto updateFeatureServiceDto)
         {
-            await _client.PutAsJsonAsync("featureServices", updateFeatureServiceDto);
+            await _featureServiceService.UpdateFeatureServiceAsync(updateFeatureServiceDto);
             return RedirectToAction("Index");
         }
     }

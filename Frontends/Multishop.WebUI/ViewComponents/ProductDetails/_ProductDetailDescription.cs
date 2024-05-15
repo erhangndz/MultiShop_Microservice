@@ -1,23 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDetailDtos;
+using Multishop.WebUI.Services.CatalogServices.ProductDetailServices;
 using Multishop.WebUI.Settings;
 
 namespace Multishop.WebUI.ViewComponents.ProductDetails
 {
-    public class _ProductDetailDescription:ViewComponent
+    public class _ProductDetailDescription(IProductDetailService _productDetailService):ViewComponent
     {
-        private readonly HttpClient _client;
-
-        public _ProductDetailDescription(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            var token = VisitorToken.CreateToken();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-            _client = client;
-        }
+        
         public async Task<IViewComponentResult> InvokeAsync(string id)
         {
-            var values = await _client.GetFromJsonAsync<List<ResultProductDetailDto>>("productDetails/getDetailsByProductId/" + id);
+            var values = await _productDetailService.GetDetails(id);
             return View(values);
         }
     }

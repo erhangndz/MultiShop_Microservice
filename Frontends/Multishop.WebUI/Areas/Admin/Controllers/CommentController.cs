@@ -1,22 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CommentDtos;
+using Multishop.WebUI.Services.CommentServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class CommentController : Controller
+    public class CommentController(ICommentService _commentService) : Controller
     {
-        private readonly HttpClient _client;
-
-        public CommentController(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7016/api/");
-            _client = client;
-        }
+        
         public async Task<IActionResult> Index()
         {
-            var values = await _client.GetFromJsonAsync<List<ResultCommentDto>>("comments");
+            var values = await _commentService.GetAllCommentsAsync();
             return View(values);
         }
 
@@ -28,19 +23,19 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateComment(CreateCommentDto createCommentDto)
         {
-            await _client.PostAsJsonAsync("comments", createCommentDto);
+            await _commentService.CreateCommentAsync(createCommentDto);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> DeleteComment(string id)
+        public async Task<IActionResult> DeleteComment(int id)
         {
-            await _client.DeleteAsync("comments/" + id);
+            await _commentService.DeleteCommentAsync(id);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> UpdateComment(string id)
+        public async Task<IActionResult> UpdateComment(int id)
         {
-            var values = await _client.GetFromJsonAsync<UpdateCommentDto>("comments/" + id);
+            var values = await _commentService.GetCommentByIdAsync(id);
             return View(values);
         }
 
@@ -48,13 +43,13 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateComment(UpdateCommentDto updateCommentDto)
         {
             updateCommentDto.Status = true;
-            await _client.PutAsJsonAsync("comments", updateCommentDto);
+            await _commentService.UpdateCommentAsync(updateCommentDto);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> GetCommentsByProductId(string id)
         {
-            var values = await _client.GetFromJsonAsync<List<ResultCommentDto>>("comments/getByProductId/" + id);
+            var values = await _commentService.GetCommentsByProductIdAsync(id);
             return View(values);
         }
     }

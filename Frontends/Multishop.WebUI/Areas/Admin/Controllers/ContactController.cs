@@ -1,23 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.ContactDtos;
+using Multishop.WebUI.Services.CatalogServices.ContactServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class ContactController : Controller
+    public class ContactController(IContactService _contactService) : Controller
     {
-        private readonly HttpClient _client;
-
-        public ContactController(HttpClient client)
-        {
-            client.BaseAddress = new Uri("https://localhost:7060/api/");
-            _client = client;
-        }
+        
 
         public async Task<IActionResult> Index()
         {
-            var values = await _client.GetFromJsonAsync<List<ResultContactDto>>("contacts");
+            var values = await _contactService.GetAllContactsAsync();
             return View(values);
         }
 
@@ -25,7 +20,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> DeleteContact(string id)
         {
-            await _client.DeleteAsync("contacts/" + id);
+            await _contactService.DeleteContactAsync(id);
             return RedirectToAction("Index");
         }
 

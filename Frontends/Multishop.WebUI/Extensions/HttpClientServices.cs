@@ -1,10 +1,17 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Services.CatalogServices.AboutServices;
+using Multishop.WebUI.Services.CatalogServices.BrandServices;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
+using Multishop.WebUI.Services.CatalogServices.ContactServices;
+using Multishop.WebUI.Services.CatalogServices.FeatureServiceServices;
+using Multishop.WebUI.Services.CatalogServices.FeatureSliderServices;
+using Multishop.WebUI.Services.CatalogServices.OfferDiscountServices;
 using Multishop.WebUI.Services.CatalogServices.ProductDetailServices;
 using Multishop.WebUI.Services.CatalogServices.ProductPhotoServices;
 using Multishop.WebUI.Services.CatalogServices.ProductServices;
+using Multishop.WebUI.Services.CatalogServices.SpecialOfferServices;
+using Multishop.WebUI.Services.CommentServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
@@ -54,6 +61,41 @@ namespace Multishop.WebUI.Extensions
             services.AddHttpClient<IAboutService, AboutService>(o =>
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IBrandService, BrandService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<ISpecialOfferService, SpecialOfferService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IFeatureSliderService, FeatureSliderService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IFeatureServiceService, FeatureServiceService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IOfferDiscountService, OfferDiscountService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IContactService, ContactService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Catalog.Path);
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<ICommentService, CommentService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Comment.Path);
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
         }

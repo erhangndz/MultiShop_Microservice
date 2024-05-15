@@ -24,6 +24,11 @@ namespace Multishop.WebUI.Services.CatalogServices.ProductServices
             return await _client.GetFromJsonAsync<UpdateProductDto>("products/" + id);
         }
 
+        public async Task<List<ResultProductDto>> GetProductsByCategoryIdAsync(string id)
+        {
+           return await _client.GetFromJsonAsync<List<ResultProductDto>>("products/getProductsByCategoryId/" + id);
+        }
+
         public async Task UpdateProductAsync(UpdateProductDto updateProductDto)
         {
             await _client.PutAsJsonAsync("products", updateProductDto);

@@ -14,5 +14,7 @@ namespace Multishop.WebUI.Services.CatalogServices.ProductServices
 
         Task CreateProductAsync(CreateProductDto createProductDto);
 
+        Task<List<ResultProductDto>> GetProductsByCategoryIdAsync(string id);
+
     }
 }
