@@ -43,19 +43,24 @@ namespace Multishop.WebUI.Controllers
         public async Task<IActionResult> ApplyCoupon(string code)
         {
             var coupon = await _discountService.GetCouponByCodeAsync(code);
-            if(coupon != null)
+            if(coupon.Rate>0)
             {
                 var basket1 = await _basketService.GetBasketAsync();
                 basket1.DiscountCode = coupon.Code;
                 basket1.DiscountRate = coupon.Rate;
                 await _basketService.SaveBasketAsync(basket1);
+                return RedirectToAction("Index");
             }
-
-            var basket = await _basketService.GetBasketAsync();
-            basket.DiscountCode = "";
-            basket.DiscountRate = 0;
-            await _basketService.SaveBasketAsync(basket);
-            return RedirectToAction("Index");
+            else
+            {
+                var basket = await _basketService.GetBasketAsync();
+                basket.DiscountCode = "";
+                basket.DiscountRate = 0;
+                await _basketService.SaveBasketAsync(basket);
+                TempData["error"] = "Kupon Kodu Geçersiz!";
+                return RedirectToAction("Index");
+            }
+           
             
         }
     }

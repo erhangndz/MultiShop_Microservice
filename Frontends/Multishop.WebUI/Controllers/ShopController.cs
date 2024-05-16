@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;
 using Multishop.WebDTO.DTOs.CommentDtos;
 
 namespace Multishop.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class ShopController : Controller
     {
         public IActionResult Index(string? id)

@@ -17,7 +17,8 @@ namespace Multishop.WebDTO.DTOs.BasketDtos
         public IList<BasketItemDto> BasketItems { get; set; }
 
         public decimal TotalPrice { get => BasketItems.Sum(x => x.Price * x.Quantity); }
+       
 
-        public decimal DiscountPrice { get => (BasketItems.Sum(x => x.Price * x.Quantity) * (1 - (DiscountRate / 100))); }
+       
     }
 }
