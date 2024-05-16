@@ -14,6 +14,7 @@ using Multishop.WebUI.Services.CatalogServices.ProductServices;
 using Multishop.WebUI.Services.CatalogServices.SpecialOfferServices;
 using Multishop.WebUI.Services.CommentServices;
 using Multishop.WebUI.Services.Concrete;
+using Multishop.WebUI.Services.DiscountServices;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
 
@@ -102,6 +103,11 @@ namespace Multishop.WebUI.Extensions
             services.AddHttpClient<IBasketService, BasketService>(o =>
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Basket.Path);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<IDiscountService, DiscountService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Discount.Path);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
         }

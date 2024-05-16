@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.BrandDtos;
 using Multishop.WebUI.Services.CatalogServices.BrandServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class BrandController(IBrandService _brandService) : Controller

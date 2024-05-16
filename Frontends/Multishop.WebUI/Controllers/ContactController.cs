@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.ContactDtos;
+using Multishop.WebUI.Services.CatalogServices.ContactServices;
 
 namespace Multishop.WebUI.Controllers
 {
-    public class ContactController : Controller
+    [AllowAnonymous]
+    public class ContactController(IContactService _contactService) : Controller
     {
       
         public IActionResult Index()
@@ -15,11 +18,7 @@ namespace Multishop.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMessage(CreateContactDto createContactDto)
         {
-            var client = new HttpClient();
-            client.BaseAddress= new Uri("https://localhost:7060/api/");
-            createContactDto.SendDate= DateTime.Now;
-            createContactDto.IsRead = false;
-            await client.PostAsJsonAsync("contacts", createContactDto);
+            await _contactService.CreateContactAsync(createContactDto);
             return RedirectToAction("Index");
         }
     }

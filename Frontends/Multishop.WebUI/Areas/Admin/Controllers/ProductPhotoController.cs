@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductPhotoDtos;
@@ -7,6 +8,7 @@ using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class ProductPhotoController(IProductPhotoService _productPhotoService, IProductService _productService) : Controller

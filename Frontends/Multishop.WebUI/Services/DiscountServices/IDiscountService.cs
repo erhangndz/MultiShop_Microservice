@@ -1,9 +1,10 @@
-﻿using Multishop.Discount.Dtos;
+﻿using Multishop.WebDTO.DTOs.DiscountDtos;
 
-namespace Multishop.Discount.Services
+namespace Multishop.WebUI.Services.DiscountServices
 {
     public interface IDiscountService
     {
+
         Task<IEnumerable<ResultCouponDto>> GetAllCouponsAsync();
 
         Task<ResultCouponDto> GetCouponByCodeAsync(string code);

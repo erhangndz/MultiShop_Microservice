@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.AboutDtos;
 using Multishop.WebUI.Services.CatalogServices.AboutServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class AboutController(IAboutService _aboutService) : Controller

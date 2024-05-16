@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.WebDTO.DTOs.CatalogDtos.CategoryDtos;
 using Multishop.WebDTO.DTOs.CatalogDtos.ProductDtos;
@@ -8,6 +9,7 @@ using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class ProductController(IProductService _productService,ICategoryService _categoryService) : Controller

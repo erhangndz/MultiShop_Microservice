@@ -1,9 +1,11 @@
-﻿<div class="col-lg-4">
-    <form class="mb-30" action="">
+﻿@model BasketTotalDto
+
+<div class="col-lg-4">
+    <form class="mb-30" asp-action="ApplyCoupon" asp-controller="ShoppingCart" method="post">
         <div class="input-group">
-            <input type="text" class="form-control border-0 p-4" placeholder="Kupon Kodu">
+            <input type="text" name="code" class="form-control border-0 p-4" placeholder="Kupon Kodu">
             <div class="input-group-append">
-                <button class="btn btn-primary">İndirimi Uygula</button>
+                <button class="btn btn-primary" type="submit">İndirimi Uygula</button>
             </div>
         </div>
     </form>
@@ -12,17 +14,34 @@
         <div class="border-bottom pb-2">
             <div class="d-flex justify-content-between mb-3">
                 <h6>Ara Toplam</h6>
-                <h6>$150</h6>
+                <h6>@Model.TotalPrice.ToString("00.00") ₺</h6>
             </div>
             <div class="d-flex justify-content-between">
-                <h6 class="font-weight-medium">Kargo Fiyatı</h6>
-                <h6 class="font-weight-medium">$10</h6>
+                <h6 class="font-weight-medium">Kdv</h6>
+                <h6 class="font-weight-medium">@((Model.TotalPrice*(decimal)0.20).ToString("00.00")) ₺</h6>
             </div>
+            @if (Model.DiscountRate != null)
+            {
+                <div class="d-flex justify-content-between mt-3">
+                    <h6 class="font-weight-medium">İndirim Oranı</h6>
+                    <h6 class="font-weight-medium"> % @Model.DiscountRate </h6>
+                </div>
+            }
         </div>
         <div class="pt-2">
             <div class="d-flex justify-content-between mt-2">
-                <h5>Toplam</h5>
-                <h5>$160</h5>
+                @if (Model.DiscountRate >0)
+                {
+                    <h5>İndirimli Fiyat</h5>
+
+                    <h5>@(((Model.TotalPrice * (decimal)1.20)* (1-Model.DiscountRate/100))) ₺</h5>
+                }
+                else
+                {
+                    <h5>Toplam</h5>
+                    <h5>@(((Model.TotalPrice * (decimal)1.20).ToString("00.00"))) ₺</h5>
+                }
+                
             </div>
             <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Ödemeye Geç</button>
         </div>

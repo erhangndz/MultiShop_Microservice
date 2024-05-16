@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Multishop.WebDTO.DTOs.CatalogDtos.SpecialOfferDtos;
 using Multishop.WebUI.Services.CatalogServices.SpecialOfferServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class SpecialOfferController(ISpecialOfferService _specialOfferService) : Controller

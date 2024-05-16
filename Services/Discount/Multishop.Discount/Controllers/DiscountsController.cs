@@ -5,7 +5,7 @@ using Multishop.Discount.Services;
 
 namespace Multishop.Discount.Controllers
 {
-    [Authorize]
+ 
     [Route("api/[controller]")]
     [ApiController]
     public class DiscountsController(IDiscountService _discountService) : ControllerBase
@@ -42,6 +42,14 @@ namespace Multishop.Discount.Controllers
         {
             await _discountService.UpdateCouponAsync(updateCouponDto);
             return Ok("İndirim Kuponu Güncellendi");
+        }
+
+        [HttpGet("GetCouponByCode")]
+        public async Task<IActionResult> GetCouponByCode(string code)
+        {
+            var value = await _discountService.GetCouponByCodeAsync(code);
+            return Ok(value);
+
         }
     }
 }

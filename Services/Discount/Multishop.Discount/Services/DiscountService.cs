@@ -30,6 +30,12 @@ namespace Multishop.Discount.Services
             return await _connection.QueryAsync<ResultCouponDto>(query);
         }
 
+        public async Task<ResultCouponDto> GetCouponByCodeAsync(string code)
+        {
+            var query = $"select * from coupons where Code='{code}'";
+            return await _connection.QueryFirstOrDefaultAsync<ResultCouponDto>(query);
+        }
+
         public async Task<ResultCouponDto> GetCouponByIdAsync(int id)
         {
 
@@ -46,4 +52,9 @@ namespace Multishop.Discount.Services
             await _connection.ExecuteAsync(query, parameters);
         }
     }
+
+
+
+
 }
+

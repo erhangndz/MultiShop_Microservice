@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Multishop.WebDTO.DTOs.CatalogDtos.CategoryDtos;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
@@ -9,6 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class CategoryController(ICategoryService _categoryService) : Controller
