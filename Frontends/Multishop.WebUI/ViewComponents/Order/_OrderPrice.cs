@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Multishop.WebUI.Services.BasketServices;
 
 namespace Multishop.WebUI.ViewComponents.Order
 {
-    public class _OrderPrice:ViewComponent
+    public class _OrderPrice(IBasketService _basketService):ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            var basket = await _basketService.GetBasketAsync();
+            return View(basket);
         }
     }
 }

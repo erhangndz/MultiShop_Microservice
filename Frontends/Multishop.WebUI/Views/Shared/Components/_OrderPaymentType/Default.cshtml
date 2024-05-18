@@ -19,6 +19,26 @@
                 <label class="custom-control-label" for="banktransfer">Havale / EFT</label>
             </div>
         </div>
-        <button class="btn btn-block btn-primary font-weight-bold py-3">Ödemeye Geç</button>
+        <button class="btn btn-block btn-primary font-weight-bold py-3" type="submit" onclick="saveAddress()">Ödemeye Geç</button>
     </div>
 </div>
+
+
+
+<script>
+    function saveAddress() {
+        Swal.fire({
+
+            title: 'Tebrikler',
+            text: 'Adresiniz başarıyla kaydedildi, Ödeme adımına yönlendirilecek',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Tamam',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Payment/Index"; // Yönlendirilecek URL'yi buraya yazın
+            }
+        });
+    }
+</script>

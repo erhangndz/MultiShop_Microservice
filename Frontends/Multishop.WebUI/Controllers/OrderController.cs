@@ -17,6 +17,7 @@ namespace Multishop.WebUI.Controllers
             ViewBag.name = user.Name;
             ViewBag.surname = user.Surname;
             ViewBag.email = user.Email;
+			ViewBag.userid = user.Id;
             return View();
 		}
 
@@ -24,10 +25,9 @@ namespace Multishop.WebUI.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreateAddress(CreateAddressDto createAddressDto)
 		{
-			var user = await _userService.GetUserInfo();
-			createAddressDto.UserId = user.Id;
+			
 			await _addressService.CreateAddressAsync(createAddressDto);
-			return RedirectToAction("Index");
+			return NoContent();
 		}
 	}
 }
