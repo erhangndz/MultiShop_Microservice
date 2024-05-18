@@ -35,6 +35,9 @@ namespace Multishop.IdentityServer.Controllers
                 Id= user.Id,
                 UserName = user.UserName,
                 Email=user.Email,
+                Name=user.Name,
+                Surname=user.Surname,
+                City= user.City,
             });
         }
     }
