@@ -14,3 +14,17 @@
 <!-- Template Javascript -->
 <script src="~/online-shop-website-template/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.getElementById('cardNumber').addEventListener('input', function () {
+        document.getElementById('displayCardNumber').textContent = this.value;
+    });
+
+    document.getElementById('cardHolder').addEventListener('input', function () {
+        document.getElementById('displayCardHolder').textContent = this.value;
+    });
+
+    document.getElementById('expiryDate').addEventListener('input', function () {
+        document.getElementById('displayExpiryDate').textContent = this.value;
+    });
+</script>

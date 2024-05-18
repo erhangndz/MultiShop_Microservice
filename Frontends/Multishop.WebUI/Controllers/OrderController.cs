@@ -9,7 +9,7 @@ namespace Multishop.WebUI.Controllers
 	
 	public class OrderController(IAddressService _addressService,IUserService _userService) : Controller
 	{
-		[HttpGet]
+		
 		public async Task<IActionResult> Index()
 		{
             var user = await _userService.GetUserInfo();
