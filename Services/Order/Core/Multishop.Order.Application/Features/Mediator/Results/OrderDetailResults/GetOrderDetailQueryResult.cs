@@ -9,5 +9,6 @@
         public int Quantity { get; set; }
         public decimal TotalPrice { get; set; }
         public int OrderingId { get; set; }
+
     }
 }
