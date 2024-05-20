@@ -1,0 +1,35 @@
+﻿@model List<ResultOrderDetailDto>
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Areas/User/Views/UserLayout/Index.cshtml";
+}
+
+<h3>Sipariş Detayı</h3>
+@{
+    int count = 0;
+}
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th>Sipariş No</th>
+        <th>Ürün Adı</th>
+        <th>Ürün Birim Fiyatı</th>
+        <th>Ürün Miktarı</th>
+        <th>Toplam Fiyatı</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td>@item.OrderingId</td>
+            <td>@item.ProductName </td>
+            <td>@item.ProductPrice ₺</td>
+            <td>@item.Quantity Adet</td>
+            <td>@item.TotalPrice ₺</td>
+            
+        </tr>
+    }
+</table>
+

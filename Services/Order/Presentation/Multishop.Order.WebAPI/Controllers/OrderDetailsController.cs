@@ -45,5 +45,12 @@ namespace Multishop.Order.WebAPI.Controllers
             await mediator.Send(command);
             return Ok("Sipariş Detayları Güncellendi");
         }
+
+        [HttpGet("GetByOrderingId/{id}")]
+        public async Task<IActionResult> GetByOrderingId(int id)
+        {
+            var values = await mediator.Send(new GetOrderDetailByOrderingIdQuery(id));
+            return Ok(values);
+        }
     }
 }
