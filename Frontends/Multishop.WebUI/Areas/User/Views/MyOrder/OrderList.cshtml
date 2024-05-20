@@ -1,14 +1,32 @@
-﻿
+﻿@model List<ResultOrderingDto>
 @{
     ViewData["Title"] = "OrderList";
     Layout = "~/Areas/User/Views/UserLayout/Index.cshtml";
 }
 
 <h3>Siparişlerim</h3>
-
+@{
+    int count = 0;
+}
 <table class="table table-bordered table-hover">
     <tr>
         <th>#</th>
-        <th></th>
+        <th>Sipariş No</th>
+        <th>Toplam Fiyat</th>
+        <th>Sipariş Tarihi</th>
+        <th>Detaylar</th>
     </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td>@item.OrderingId</td>
+            <td>@item.TotalPrice ₺</td>
+            <td>@item.OrderDate.ToLongDateString()</td>
+            <td>
+                <a asp-action="OrderDetails" asp-controller="MyOrder" asp-route-id="@item.OrderingId" class="btn btn-outline-primary">Sipariş Detayları</a>
+            </td>
+        </tr>
+    }
 </table>

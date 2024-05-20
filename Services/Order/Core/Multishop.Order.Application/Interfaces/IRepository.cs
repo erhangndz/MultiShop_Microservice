@@ -10,5 +10,6 @@ namespace Multishop.Order.Application.Interfaces
         Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
         Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter);
+        Task<List<T>> GetFilteredListAsync(Expression<Func<T, bool>> filter);
     }
 }

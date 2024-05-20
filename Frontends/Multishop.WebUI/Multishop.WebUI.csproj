@@ -12755,7 +12755,6 @@
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Services\OrderServices\OrderDetailServices\" />
-    <Folder Include="Services\OrderServices\OrderingServices\" />
     <Folder Include="wwwroot\spica\.git\refs\tags\" />
   </ItemGroup>
 

@@ -36,6 +36,11 @@ namespace Multishop.Order.Persistence.Repositories
             return await Table.FindAsync(id);
         }
 
+        public async Task<List<T>> GetFilteredListAsync(Expression<Func<T, bool>> filter)
+        {
+            return await Table.Where(filter).ToListAsync();
+        }
+
         public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);
