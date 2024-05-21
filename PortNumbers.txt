@@ -8,3 +8,4 @@ Identity => https://localhost:5001
 Comment  => https://localhost:7016
 Payment  => https://localhost:7027
 Images  => https://localhost:7275
+Message  => https://localhost:7017

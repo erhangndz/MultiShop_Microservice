@@ -5,7 +5,7 @@ using Multishop.WebUI.Services.CatalogServices.FeatureSliderServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+   
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class FeatureSliderController(IFeatureSliderService _featureSliderService) : Controller

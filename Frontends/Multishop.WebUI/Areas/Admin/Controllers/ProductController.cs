@@ -9,7 +9,7 @@ using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+    
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class ProductController(IProductService _productService,ICategoryService _categoryService) : Controller

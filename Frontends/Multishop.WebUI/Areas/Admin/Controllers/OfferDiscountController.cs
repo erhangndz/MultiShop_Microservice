@@ -5,7 +5,7 @@ using Multishop.WebUI.Services.CatalogServices.OfferDiscountServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+    
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class OfferDiscountController(IOfferDiscountService _offerDiscountService) : Controller

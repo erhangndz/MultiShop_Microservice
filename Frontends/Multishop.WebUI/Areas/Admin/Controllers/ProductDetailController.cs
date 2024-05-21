@@ -7,7 +7,7 @@ using Multishop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+   
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class ProductDetailController(IProductDetailService _productDetailService,IProductService _productService) : Controller

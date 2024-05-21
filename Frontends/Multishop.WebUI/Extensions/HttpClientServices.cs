@@ -16,6 +16,7 @@ using Multishop.WebUI.Services.CommentServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.DiscountServices;
 using Multishop.WebUI.Services.Interfaces;
+using Multishop.WebUI.Services.MessageServices;
 using Multishop.WebUI.Services.OrderServices.AddressServices;
 using Multishop.WebUI.Services.OrderServices.OrderDetailServices;
 using Multishop.WebUI.Services.OrderServices.OrderingServices;
@@ -121,6 +122,11 @@ namespace Multishop.WebUI.Extensions
             services.AddHttpClient<IOrderingService, OrderingService>(o =>
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Order.Path);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<IMessageService, MessageService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Message.Path);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
             services.AddHttpClient<IOrderDetailService, OrderDetailService>(o =>

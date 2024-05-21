@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+    
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class CategoryController(ICategoryService _categoryService) : Controller

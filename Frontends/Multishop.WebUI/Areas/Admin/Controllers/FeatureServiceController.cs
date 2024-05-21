@@ -5,7 +5,7 @@ using Multishop.WebUI.Services.CatalogServices.FeatureServiceServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+    
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class FeatureServiceController(IFeatureServiceService _featureServiceService) : Controller

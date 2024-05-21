@@ -1,0 +1,38 @@
+﻿@model List<ResultMessageDto>
+@{
+    ViewData["Title"] = "SentBox";
+    Layout = "~/Areas/User/Views/UserLayout/Index.cshtml";
+}
+
+<h3>Gönderilen Mesajlar</h3>
+
+@{
+    int count = 0;
+}
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th>Alıcı Id</th>
+        <th>Konu</th>
+        <th>Mesaj Tarihi</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td>@item.ReceiverId</td>
+            <td>@item.Subject</td>
+            <td>@item.SendDate.ToLongDateString()</td>
+            <td>@(item.IsRead ? "Okundu" : "Okunmadı")</td>
+
+            <td> <a asp-action="DeleteMessage" asp-controller="Message" asp-route-id="@item.UserMessageId" class="btn btn-outline-danger">Sil</a></td>
+            <td> <a asp-action="MessageDetails" asp-controller="Message" asp-route-id="@item.UserMessageId" class="btn btn-outline-primary">Mesajı Aç</a></td>
+
+
+        </tr>
+    }
+</table>

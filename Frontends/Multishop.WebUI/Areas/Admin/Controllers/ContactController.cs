@@ -5,7 +5,7 @@ using Multishop.WebUI.Services.CatalogServices.ContactServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+  
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class ContactController(IContactService _contactService) : Controller

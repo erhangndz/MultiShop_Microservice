@@ -5,7 +5,7 @@ using Multishop.WebUI.Services.CommentServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize]
+   
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class CommentController(ICommentService _commentService) : Controller
