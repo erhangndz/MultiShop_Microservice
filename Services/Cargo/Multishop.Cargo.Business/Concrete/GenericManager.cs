@@ -1,5 +1,6 @@
 ﻿using Multishop.Cargo.Business.Abstract;
 using Multishop.Cargo.DataAccess.Abstract;
+using System.Linq.Expressions;
 
 namespace Multishop.Cargo.Business.Concrete
 {
@@ -20,9 +21,19 @@ namespace Multishop.Cargo.Business.Concrete
             return genericDal.GetAll();
         }
 
+        public T TGetByFilter(Expression<Func<T, bool>> filter)
+        {
+           return genericDal.GetByFilter(filter);
+        }
+
         public T TGetById(int id)
         {
             return genericDal.GetById(id);
+        }
+
+        public IList<T> TGetFilteredList(Expression<Func<T, bool>> filter)
+        {
+           return genericDal.GetFilteredList(filter);
         }
 
         public void TUpdate(T entity)

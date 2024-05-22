@@ -37,7 +37,7 @@ namespace Multishop.Cargo.API.Controllers
         public IActionResult Create(CreateCustomerDto createCustomerDto)
         {
             customerService.TCreate(mapper.Map<Customer>(createCustomerDto));
-            return Created();
+            return Ok(createCustomerDto);
         }
 
         [HttpPut]
@@ -45,6 +45,13 @@ namespace Multishop.Cargo.API.Controllers
         {
             customerService.TUpdate(mapper.Map<Customer>(updateCustomerDto));
             return Ok("Müşteri Güncellendi");
+        }
+
+        [HttpGet("GetByUserId/{id}")]
+        public IActionResult GetByUserId(string id)
+        {
+            var values = customerService.TGetFilteredList(x => x.UserId == id);
+            return Ok(values);
         }
     }
 }

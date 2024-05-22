@@ -1,4 +1,6 @@
-﻿namespace Multishop.Cargo.Business.Abstract
+﻿using System.Linq.Expressions;
+
+namespace Multishop.Cargo.Business.Abstract
 {
     public interface IGenericService<T> where T : class
     {
@@ -7,5 +9,9 @@
         void TDelete(int id);
         T TGetById(int id);
         IList<T> TGetAll();
+
+        T TGetByFilter(Expression<Func<T, bool>> filter);
+
+        IList<T> TGetFilteredList(Expression<Func<T, bool>> filter);
     }
 }

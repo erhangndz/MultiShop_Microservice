@@ -1,6 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Services.BasketServices;
+using Multishop.WebUI.Services.CargoServices.CargoCustomerServices;
+using Multishop.WebUI.Services.CargoServices.CompanyServices;
 using Multishop.WebUI.Services.CatalogServices.AboutServices;
 using Multishop.WebUI.Services.CatalogServices.BrandServices;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
@@ -132,6 +134,16 @@ namespace Multishop.WebUI.Extensions
             services.AddHttpClient<IOrderDetailService, OrderDetailService>(o =>
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Order.Path);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<ICompanyService, CompanyService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Cargo.Path);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<ICargoCustomerService, CargoCustomerService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Cargo.Path);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
         }

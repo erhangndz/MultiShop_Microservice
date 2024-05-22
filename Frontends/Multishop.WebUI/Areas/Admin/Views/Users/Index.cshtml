@@ -1,0 +1,52 @@
+﻿@model List<ResultUserDto>
+@{
+    ViewData["Title"] = "Kullanıcı Listesi";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive table-striped">
+                @{
+                    int count = 0;
+                }
+                <thead>
+                    <tr>
+                        <th class="sortable">#</th>
+                        <th class="sortable">Ad Soyad</th>
+                        <th class="sortable">Kullanıcı Adı</th>
+                        <th class="sortable">Email</th>
+                        <th class="sortable">Adres Detayı</th>
+                        
+                       
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    count++;
+
+                    <tr>
+                        <th class="text-truncate">@count</th>
+                        <td class="text-truncate">@item.name @item.surname</td>
+                        <td class="text-truncate">@item.userName</td>
+                        <td class="text-truncate">@item.email</td>
+                        <td class="text-truncate"> <a class="btn btn-outline btn-rounded btn-info" asp-action="AddressDetailByUserId" asp-route-id="@item.id"><i class="fa fa-envelope"></i> Adres Detayı</a></td>
+                       
+                       
+                    </tr>
+                }
+
+            </table>
+           
+        </div>
+    </div>
+</div>
+

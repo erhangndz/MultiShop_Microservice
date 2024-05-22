@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Multishop.Cargo.DataAccess.Abstract;
 using Multishop.Cargo.DataAccess.Concrete;
+using System.Linq.Expressions;
 
 namespace Multishop.Cargo.DataAccess.Repositories
 {
@@ -25,9 +26,19 @@ namespace Multishop.Cargo.DataAccess.Repositories
             return Table.ToList();
         }
 
+        public T GetByFilter(Expression<Func<T, bool>> filter)
+        {
+            return Table.FirstOrDefault(filter);
+        }
+
         public T GetById(int id)
         {
             return Table.Find(id);
+        }
+
+        public IList<T> GetFilteredList(Expression<Func<T, bool>> filter)
+        {
+           return Table.Where(filter).ToList();
         }
 
         public void Update(T entity)

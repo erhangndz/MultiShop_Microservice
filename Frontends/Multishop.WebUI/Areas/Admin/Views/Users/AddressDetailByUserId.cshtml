@@ -1,0 +1,64 @@
+﻿@model IList<ResultCustomerDto>
+@{
+    ViewData["Title"] = "Müşteri Adres Detayları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning">
+
+                    Kullanıcı Adres Bilgisi Bulunamadı! <strong><a href="/Admin/Users/Index">Kullanıcılara Geri Dön</a></strong>
+                </div>
+            }
+            else
+            {
+            <div id="example_filter" class="dataTables_filter pull-right">
+                <input class="form-control" id="placeholderInput" placeholder="Ara" type="text">
+            </div>
+            <table class="table table-responsive table-striped">
+               
+                <tbody>
+                    @for(int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <th class="sortable">Ad Soyad:</th>
+                            <td class="sortable">@Model[i].Name @Model[i].Surname</td>
+                        </tr>
+                        <tr>
+                            <th class="sortable">Email:</th>
+                            <td class="sortable">@Model[i].Email</td>
+                        </tr>
+                        <tr>
+                            <th class="sortable">Telefon:</th>
+                            <td class="sortable">@Model[i].Phone</td>
+                        </tr>
+                        <tr>
+                            <th class="sortable">Şehir:</th>
+                            <td class="sortable">@Model[i].City</td>
+                        </tr>
+                        <tr>
+                            <th class="sortable">İlçe:</th>
+                            <td class="sortable">@Model[i].District</td>
+                        </tr>
+                        <tr>
+                            <th class="sortable">Adres:</th>
+                            <td class="sortable">@Model[i].Address</td>
+                        </tr>
+                    }
+                   
+                  
+                </tbody>
+               
+
+            </table>
+            <br />
+            <strong><a href="/Admin/Users/Index" class="btn btn-outline-info btn-rounded">Kullanıcılara Geri Dön</a></strong>
+            }
+        </div>
+    </div>
+</div>
