@@ -1,24 +1,27 @@
 ﻿
+using MongoDB.Driver;
 using Multishop.Catalog.Entities;
+using Multishop.Catalog.Services.ProductServices;
 
 namespace Multishop.Catalog.Services.StatisticsServices
 {
     public class StatisticsService : IStatisticsService
     {
         private readonly IRepository<Category> _categoryRepository;
-        private readonly IRepository<Product> _productRepository;
+        private readonly IProductService _productService;
         private readonly IRepository<Brand> _brandRepository;
 
-        public StatisticsService(IRepository<Category> categoryRepository, IRepository<Product> productRepository, IRepository<Brand> brandRepository)
+        public StatisticsService(IRepository<Category> categoryRepository, IRepository<Brand> brandRepository, IProductService productService)
         {
             _categoryRepository = categoryRepository;
-            _productRepository = productRepository;
+
             _brandRepository = brandRepository;
+            _productService = productService;
         }
 
         public async Task<decimal> GetAvgProductPriceAsync()
         {
-           return await _productRepository.GetAvgValueAsync();
+           return await _productService.GetAvgPriceAsync();
         }
 
         public async Task<long> GetBrandCountAsync()
@@ -31,9 +34,19 @@ namespace Multishop.Catalog.Services.StatisticsServices
             return await _categoryRepository.GetCountAsync();
         }
 
+        public async Task<string> GetCheapestProductName()
+        {
+           return await _productService.GetCheapestProductName();
+        }
+
+        public async Task<string> GetMostExpensiveProductName()
+        {
+          return await _productService.GetMostExpensiveProductName();
+        }
+
         public async Task<long> GetProductCountAsync()
         {
-            return await _productRepository.GetCountAsync();
+            return await _productService.GetCountAsync();
         }
     }
 }

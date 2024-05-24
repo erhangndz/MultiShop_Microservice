@@ -43,6 +43,12 @@ namespace Multishop.Discount.Services
             return await _connection.QueryFirstOrDefaultAsync<ResultCouponDto>(query);
         }
 
+        public async Task<int> GetCouponCountAsync()
+        {
+            var query = "select count(*) from coupons";
+            return await _connection.QueryFirstOrDefaultAsync<int>(query);
+        }
+
         public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
         {
             var query = $"update coupons set Code=@Code,rate=@Rate,Isactive=@IsActive,validdate=@ValidDate where CouponId={updateCouponDto.CouponId}";

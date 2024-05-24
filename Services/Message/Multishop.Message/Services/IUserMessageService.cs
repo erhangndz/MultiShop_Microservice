@@ -13,5 +13,7 @@ namespace Multishop.Message.Services
         Task CreateMessageAsync(CreateMessageDto message);
         Task DeleteMessageAsync(int id);
 
+        Task<int> GetTotalMessageCountAsync();
+
     }
 }

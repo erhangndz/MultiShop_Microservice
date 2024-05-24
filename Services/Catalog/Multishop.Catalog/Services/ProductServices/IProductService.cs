@@ -7,5 +7,10 @@ namespace Multishop.Catalog.Services.ProductServices
     {
 
         Task<List<ResultProductDto>> GetProductsByCategoryIdAsync(string categoryId);
+
+        Task<decimal> GetAvgPriceAsync();
+
+        Task<string> GetMostExpensiveProductName();
+        Task<string> GetCheapestProductName();
     }
 }

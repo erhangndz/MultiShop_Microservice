@@ -6,6 +6,7 @@
         Task<long> GetProductCountAsync();
         Task<long> GetBrandCountAsync();
         Task<decimal> GetAvgProductPriceAsync();
-
+        Task<string> GetMostExpensiveProductName();
+        Task<string> GetCheapestProductName();
     }
 }

@@ -12,6 +12,6 @@ namespace Multishop.Catalog.Services
 
         Task<long> GetCountAsync();
 
-        Task<decimal> GetAvgValueAsync();
+        
     }
 }

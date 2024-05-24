@@ -31,21 +31,7 @@ namespace Multishop.Catalog.Services
             return await _collection.AsQueryable().ToListAsync();
         }
 
-        public async Task<decimal> GetAvgValueAsync()
-        {
-            var pipeline = new BsonDocument[]
-            {
-                new BsonDocument("$group",new BsonDocument
-                {
-                    {"_id",null },
-                    {"averagePrice",new BsonDocument("$avg","$price") }
-                })
-            };
-
-            var result = await _collection.AggregateAsync<BsonDocument>(pipeline);
-           var values = result.FirstOrDefault().GetValue("averagePrice",decimal.Zero).AsDecimal;
-            return values;
-        }
+        
 
         public async Task<T> GetByIdAsync(string id)
         {
