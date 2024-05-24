@@ -38,9 +38,19 @@ namespace Multishop.Catalog.Services.FeatureSliderServices
            return await _featureCollection.AsQueryable().ToListAsync();
         }
 
+        public Task<decimal> GetAvgValueAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<FeatureSlider> GetByIdAsync(string id)
         {
             return await _featureCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public Task<long> GetCountAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task ShowOnHomeAsync(string id)

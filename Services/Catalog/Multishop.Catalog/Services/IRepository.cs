@@ -9,5 +9,9 @@ namespace Multishop.Catalog.Services
         Task<T> GetByIdAsync(string id);
         Task UpdateAsync(T entity);
         Task DeleteAsync(string id);
+
+        Task<long> GetCountAsync();
+
+        Task<decimal> GetAvgValueAsync();
     }
 }

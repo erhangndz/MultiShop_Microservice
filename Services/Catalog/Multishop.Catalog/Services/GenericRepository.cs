@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Multishop.Catalog.Entities;
 using Multishop.Catalog.Settings;
 
@@ -30,10 +31,31 @@ namespace Multishop.Catalog.Services
             return await _collection.AsQueryable().ToListAsync();
         }
 
+        public async Task<decimal> GetAvgValueAsync()
+        {
+            var pipeline = new BsonDocument[]
+            {
+                new BsonDocument("$group",new BsonDocument
+                {
+                    {"_id",null },
+                    {"averagePrice",new BsonDocument("$avg","$price") }
+                })
+            };
+
+            var result = await _collection.AggregateAsync<BsonDocument>(pipeline);
+           var values = result.FirstOrDefault().GetValue("averagePrice",decimal.Zero).AsDecimal;
+            return values;
+        }
+
         public async Task<T> GetByIdAsync(string id)
         {
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+        }
+
+        public async Task<long> GetCountAsync()
+        {
+            return await _collection.CountDocumentsAsync(x=>true);
         }
 
         public async Task UpdateAsync(T entity)
