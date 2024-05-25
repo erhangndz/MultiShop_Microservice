@@ -47,6 +47,11 @@ namespace Multishop.WebUI.Services.DiscountServices
             return await _client.GetFromJsonAsync<ResultCouponDto>("discounts/" + id);
         }
 
+        public async Task<int> GetCouponCountAsync()
+        {
+            return await _client.GetFromJsonAsync<int>("discounts/getCouponCount");
+        }
+
         public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
         {
             await _client.PutAsJsonAsync("discounts", updateCouponDto);

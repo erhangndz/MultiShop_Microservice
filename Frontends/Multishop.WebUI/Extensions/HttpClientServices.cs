@@ -23,6 +23,7 @@ using Multishop.WebUI.Services.OrderServices.AddressServices;
 using Multishop.WebUI.Services.OrderServices.OrderDetailServices;
 using Multishop.WebUI.Services.OrderServices.OrderingServices;
 using Multishop.WebUI.Services.StatisticsServices.CatalogStatisticsServices;
+using Multishop.WebUI.Services.StatisticsServices.CommentStatisticsServices;
 using Multishop.WebUI.Services.StatisticsServices.UserStatisticsService;
 using Multishop.WebUI.Settings;
 
@@ -156,6 +157,11 @@ namespace Multishop.WebUI.Extensions
             services.AddHttpClient<IUserStatisticsService, UserStatisticsService>(o =>
             {
                 o.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<ICommentStatisticsService, CommentStatisticsService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl+serviceApiSettings.Comment.Path);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
         }

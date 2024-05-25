@@ -11,17 +11,17 @@ namespace Multishop.Catalog.Services.ProductServices
     {
         private readonly IMongoCollection<Product> _productCollection;
         private readonly IMapper _mapper;
-        public ProductService(IDatabaseSettings settings,IMapper mapper) : base(settings) 
+        public ProductService(IDatabaseSettings settings, IMapper mapper) : base(settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _productCollection = database.GetCollection<Product>(typeof(Product).Name.ToLowerInvariant());
-            _mapper= mapper;
+            _mapper = mapper;
         }
 
         public async Task<List<ResultProductDto>> GetProductsByCategoryIdAsync(string categoryId)
         {
-          var values = await _productCollection.Find(x=>x.CategoryId == categoryId).ToListAsync();
+            var values = await _productCollection.Find(x => x.CategoryId == categoryId).ToListAsync();
 
             return _mapper.Map<List<ResultProductDto>>(values);
         }
@@ -36,6 +36,8 @@ namespace Multishop.Catalog.Services.ProductServices
                     {"_id",null },
                     {"averagePrice",new BsonDocument("$avg","$price") }
                 })
+
+
             };
 
             var result = await _productCollection.AggregateAsync<BsonDocument>(pipeline);
