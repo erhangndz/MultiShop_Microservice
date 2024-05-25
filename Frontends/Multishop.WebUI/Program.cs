@@ -44,22 +44,14 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddAccessTokenManagement();
 builder.Services.AddHttpClientServices(builder.Configuration);
 
-
-
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
-
-
 
 
 builder.Services.AddControllersWithViews(o =>
 {
     o.Filters.Add(new AuthorizeFilter());
 });
-
-
-
-
 
 var app = builder.Build();
 
