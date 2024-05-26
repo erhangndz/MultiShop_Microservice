@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+
+ <script src="~/lib/jquery/dist/jquery.min.js"></script> 
+
+            <br /><br />
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <script type="text/javascript">
+                            $(document).ready(() => {
+                                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7242/SignalRHub").build();
+                                $("#connstatus").text(connection.state);
+
+                                connection.start().then(() => {
+                                    $("#connstatus").text(connection.state);
+                                    connection.invoke("SendStatisticsCount");
+
+                                }).catch((err) => { console.log(err) });
+
+
+
+
+
+                            });    
+                        
+                        </script>
+                    </div>
+
+                </div>
+
+            </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-8 offset-2">
+    <div class="alert alert-info">Bağlantının Durumu :<strong id="connstatus"></strong></div>
+    <div class="alert alert-info">Yorum Sayısı:<strong id="commentCount"></strong></div>
+</div>

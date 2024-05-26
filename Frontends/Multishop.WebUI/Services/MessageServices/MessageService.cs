@@ -30,6 +30,11 @@ namespace Multishop.WebUI.Services.MessageServices
             return await _client.GetFromJsonAsync<UpdateMessageDto>("messages/" + id);
         }
 
+        public async Task<int> GetMessageCountByReceiverIdAsync(string id)
+        {
+            return await _client.GetFromJsonAsync<int>("messages/GetMessageCountByReceiverId/" + id);
+        }
+
         public async Task<List<ResultMessageDto>> GetSentBoxMessagesAsync(string id)
         {
             return await _client.GetFromJsonAsync<List<ResultMessageDto>>("messages/getSentbox/" + id);

@@ -1,0 +1,6 @@
+@Multishop.SignalRRealTimeApi_HostAddress = http://localhost:5029
+
+GET {{Multishop.SignalRRealTimeApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

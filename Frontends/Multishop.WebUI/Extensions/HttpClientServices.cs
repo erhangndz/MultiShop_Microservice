@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Multishop.SignalRRealTimeApi.Services;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Services.BasketServices;
 using Multishop.WebUI.Services.CargoServices.CargoCustomerServices;
@@ -24,6 +25,7 @@ using Multishop.WebUI.Services.OrderServices.OrderDetailServices;
 using Multishop.WebUI.Services.OrderServices.OrderingServices;
 using Multishop.WebUI.Services.StatisticsServices.CatalogStatisticsServices;
 using Multishop.WebUI.Services.StatisticsServices.CommentStatisticsServices;
+using Multishop.WebUI.Services.StatisticsServices.MessageStatisticsServices;
 using Multishop.WebUI.Services.StatisticsServices.UserStatisticsService;
 using Multishop.WebUI.Settings;
 
@@ -163,6 +165,15 @@ namespace Multishop.WebUI.Extensions
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl+serviceApiSettings.Comment.Path);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<IMessageStatisticsService, MessageStatisticsService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Message.Path);
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<ISignalRService, SignalRService>().AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+
 
         }
 

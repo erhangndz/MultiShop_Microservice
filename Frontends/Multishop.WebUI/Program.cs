@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 using Multishop.WebUI.Extensions;
 using Multishop.WebUI.Handlers;
+using Multishop.WebUI.Hubs;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.Interfaces;
@@ -15,6 +16,17 @@ using System.Security.Principal;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSignalR();
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .SetIsOriginAllowed((host) => true)
+               .AllowCredentials();
+    });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
@@ -69,6 +81,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("CorsPolicy");
 
 app.MapControllerRoute(
     name: "default",
@@ -82,4 +95,6 @@ app.UseEndpoints(endpoints =>
     );
 });
 
+
+app.MapHub<SignalRHub>("/signalrhub");
 app.Run();

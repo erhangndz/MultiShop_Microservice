@@ -94,6 +94,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\SignalRRealTime\Multishop.SignalRRealTimeApi\Multishop.SignalRRealTimeApi.csproj" />
     <ProjectReference Include="..\Multishop.WebDTO\Multishop.WebDTO.csproj" />
   </ItemGroup>
 

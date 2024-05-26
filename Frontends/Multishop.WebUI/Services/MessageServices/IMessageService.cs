@@ -12,5 +12,7 @@ namespace Multishop.WebUI.Services.MessageServices
         Task UpdateMessageAsync(UpdateMessageDto message);
         Task CreateMessageAsync(CreateMessageDto message);
         Task DeleteMessageAsync(int id);
+
+        Task<int> GetMessageCountByReceiverIdAsync(string id);
     }
 }

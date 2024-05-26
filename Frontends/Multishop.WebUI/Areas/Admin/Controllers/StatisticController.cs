@@ -2,13 +2,14 @@
 using Multishop.WebUI.Services.DiscountServices;
 using Multishop.WebUI.Services.StatisticsServices.CatalogStatisticsServices;
 using Multishop.WebUI.Services.StatisticsServices.CommentStatisticsServices;
+using Multishop.WebUI.Services.StatisticsServices.MessageStatisticsServices;
 using Multishop.WebUI.Services.StatisticsServices.UserStatisticsService;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
-    public class StatisticController(ICatalogStatisticsService _catalogStatisticsService,IUserStatisticsService _userStatisticsService,ICommentStatisticsService _commentStatisticsService,IDiscountService _discountService) : Controller
+    public class StatisticController(ICatalogStatisticsService _catalogStatisticsService,IUserStatisticsService _userStatisticsService,ICommentStatisticsService _commentStatisticsService,IDiscountService _discountService,IMessageStatisticsService _messageStatisticsService) : Controller
     {
         public async Task<IActionResult> Index()
         {
@@ -23,6 +24,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
             ViewBag.passiveCommentCount= await _commentStatisticsService.GetPassiveCommentCountAsync();
             ViewBag.totalCommentCount= await _commentStatisticsService.GetTotalCommentCountAsync();
             ViewBag.couponCount= await _discountService.GetCouponCountAsync();
+            ViewBag.messageCount= await _messageStatisticsService.GetTotalMessageCountAsync();
             return View();
         }
     }
