@@ -25,9 +25,9 @@
 
                                 }).catch((err) => { console.log(err) });
 
-
-
-
+                                connection.on("ReceiveCommentCount", (comment) => {
+                                    $("#commentCount").text(comment);
+                                });
 
                             });    
                         

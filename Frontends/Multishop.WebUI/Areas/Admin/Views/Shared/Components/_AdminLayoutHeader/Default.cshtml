@@ -1,11 +1,46 @@
-﻿<header class="main-header dark-bg">
+﻿
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+
+<div class="container-fluid">
+
+
+            <script type="text/javascript">
+                $(document).ready(() => {
+                    var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7242/SignalRHub").build();
+                    $("#connstatus").text(connection.state);
+
+                    connection.start().then(() => {
+                        $("#connstatus").text(connection.state);
+                        connection.invoke("SendStatisticsCount");
+
+                    }).catch((err) => { console.log(err) });
+
+                    connection.on("ReceiveCommentCount", (comment) => {
+                        $("#commentCount").text(comment);
+                    });
+
+                    connection.on("ReceiveMessageCount", (message) => {
+                        $("#messageCount").text(message);
+                    });
+
+                });
+
+            </script>
+
+
+</div>
+
+<header class="main-header dark-bg">
 
     <!-- Logo -->
-    <a href="../index.html" class="logo dark-bg">
+    <a href="/Admin/Statistic/Index" class="logo dark-bg">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><img src="~/images/mulhtishop1.jpg" style="width:112px;height:20px"></span>
+        <span class="logo-mini"><img src="~/images/multishop2.png" style="width:50px;height:50px"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="~/images/mulhtishop1.jpg" style="width:112px;height:20px"></span>
+        <span class="logo-lg"><img src="~/images/mulhtishop1.jpg" style="width:150px;height:30px"></span>
     </a>
 
     <!-- Header Navbar -->
@@ -28,8 +63,8 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-envelope"></i>
-                        <div class="notify"> <span class="heartbit"></span> <span class="badge" style="position:relative;right:-8px;top:-20px"><strong>@ViewBag.messageCount</strong></span> </div>
+                        <i class="icon-envelope"><span class="badge" style="position:relative;top:-10px"><strong id="messageCount">0</strong></span></i>
+                        <div class="notify"> <span class="heartbit"></span>  </div>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">@ViewBag.messageCount adet mesajınız var</li>
@@ -76,8 +111,8 @@
                 <!-- Notifications Menu -->
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-comment"></i> 
-                        <div class="notify"><span class="heartbit"></span>  <span class="badge" style="position:relative;right:-8px;top:-20px"><strong>@ViewBag.passiveCommentCount</strong></span></div>
+                        <i class="fa fa-comment"><span class="badge" style="position:relative;top:-10px"><strong id="commentCount">0</strong></span></i>
+                        <div class="notify"><span class="heartbit"></span></div>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">Onay Bekleyen Yorumlar</li>
