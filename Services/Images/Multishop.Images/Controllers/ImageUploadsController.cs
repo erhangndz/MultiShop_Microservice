@@ -82,7 +82,7 @@ namespace Multishop.Images.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+            {  
                 try
                 {
                     await ReplacePhoto(image);
