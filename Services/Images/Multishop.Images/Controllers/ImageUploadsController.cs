@@ -91,6 +91,7 @@ namespace Multishop.Images.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+
                     if (!ImageExists(image.Id))
                     {
                         return BadRequest();
