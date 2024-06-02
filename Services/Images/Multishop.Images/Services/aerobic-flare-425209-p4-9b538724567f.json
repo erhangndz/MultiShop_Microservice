@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "aerobic-flare-425209-p4",
+  "private_key_id": "9b538724567f1dc767ffee6db4e101c9c11c08c6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDav2MBvFfDdNZ0\n69tn9r0KDklSQSoyxXUSaN5Pk3gegfgc/YJoK1bX8ZInsGGevNJ9aaHE4Dw5sYtY\nTs0mkmP8nMXVSODjO3bcryoqJLQDP6UH8QJ25JL0AtAIIsqgsSBtevoxOr2VsGCO\naBz07l90LC27Lfkk1dTnty7PfV5jY7RM/UaeSwshN8WlKr0t3XZpPXXIJjM+vpzq\nbUFWZJ3c9DS7g98CtqZl34+3Hje+dL3344jRSzlEl8VkmYr1LULwJu6qsNjYDgS/\n98TU5oVlvJwURGiDL21aCrOGB6gmlRIfR9KlTUYmEr6RxJZBkkmxfFOCxzENMaTa\nzd3bl/JRAgMBAAECggEAYjnDpxFgZXvPGxSX4sDIlT3iDcYGQWMqVVhyz0/chfJ9\nq+LoTod7iR9ILntE8qc+a6NlyUaZtJx1gnNsKrBcpp/tM/90QIVAtAsSB3eQv86x\n9/Vw0luEY37p1GVvEKZI9fBdbYK/g/p9+SRmMFPj2AJIjL8xm6lLX7uBkRluK3lS\n/xBHcBIyaUUqLxeF4eVS5EjZtAMGltJjeTk14lXXEhcu9EzazNcgMwg+4EBBQy1/\n5ZUxJfzArJqnddnbUlfIGluGc6KNC+F9TGawfraxzLrZsXB7RKGdwbs5V6NRca1b\nxcO8S1Et4ylO//GQau7DR6ra7z8zgWPqcFXgI6UjowKBgQDv8Y5L2AAl7JZGM+QH\n3sHRTAjgDbLnKO1KCRKksk0hxHeNyLEDQTInEUvVUppnh7oTa7wMFKYZCSdmfesw\nBWMdvs47CUCYz6OCO/y2F4BO4TPDGk9HvqTDyF79lug72xrWYwRbm4yweuMG2gqc\nmbekFrmHJq7cb4uieRqe00M0zwKBgQDpYrmrbFNoUoLs553EwCMmVmiDkxkl6Asg\nWdNT4bj5iD7qIsLt+XHEmpigX7HJpqPh+0Dee3JN/Y0RfPsCfvz3MgCNMCjP2/WR\nIqAYy/orrwcylTHl04tOnPMAy4Hnfaalk1+i6C20KQZwctIbivi/g+hIFv0VOZwu\nTQvAJeRu3wKBgQDWG0ZOh0AalzLBEiy4mR16Fc8VnyO1AeA74DyymigZqabE7gCG\nVvbZxaVVhZAiMgroqYnzfbl5PaHa4yGqiCQZttlv9KGfuii9XanzEqV7vZjiz+dO\nrd94lKOuxaoVPz6Db3fEBtlT4VQUGRy/AKvN0DldUDdYnHCNWmNWtk2SIQKBgQCy\njShVQNPy/SVTT8QBEaoSm4rsFq7ntEZG4tHt28QjjBvuDtgpLmzeqBPapjujdczt\nh8bSL4l8p120onR7LWIlUGjhm5WtqK+P8Pig3/UuVILiLQh2t0hdxW+YDRn+W8AR\n7tT9EjpdGgHmJ8Ic9k5mXulntca75U5akfFKePLx6wKBgQDTjMqb+Q7VXCc0WMH8\n2vPNOpdqPQQ74Z+UXbRJutnzZWJhAlTJ5uuV+jie903f0f5T4uboMOU2PXj73OaS\n9c/EutskEtICKXHk++FfXaMiubLM0dbiicmnqcDNGRPeSFXDTgG5+GUwGA8lhjc4\nsPTk95A0TfZLScwFpW4vC1Xt5g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "mymultishopproject@aerobic-flare-425209-p4.iam.gserviceaccount.com",
+  "client_id": "103266014244610025098",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mymultishopproject%40aerobic-flare-425209-p4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
