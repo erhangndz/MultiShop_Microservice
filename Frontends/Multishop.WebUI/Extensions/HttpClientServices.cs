@@ -18,6 +18,7 @@ using Multishop.WebUI.Services.CatalogServices.SpecialOfferServices;
 using Multishop.WebUI.Services.CommentServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.DiscountServices;
+using Multishop.WebUI.Services.ImageServices;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Services.MessageServices;
 using Multishop.WebUI.Services.OrderServices.AddressServices;
@@ -170,6 +171,11 @@ namespace Multishop.WebUI.Extensions
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Message.Path);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            services.AddHttpClient<IImageService, ImageService>(o =>
+            {
+                o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Images.Path);
+            });
 
             services.AddHttpClient<ISignalRService, SignalRService>().AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
