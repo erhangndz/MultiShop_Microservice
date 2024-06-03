@@ -2,12 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using Multishop.Images.ConfigOptions;
 using Multishop.Images.Context;
 using Multishop.Images.Services;
+using Multishop.Images.Services.ImageServices;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 
+builder.Services.AddScoped<IImageService,ImageService>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<ImagesContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
