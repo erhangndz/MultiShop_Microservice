@@ -5,7 +5,7 @@ using Multishop.WebUI.Services.ImageServices;
 
 namespace Multishop.WebUI.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
+  
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class ImageUploadController(IImageService _imageService) : Controller
@@ -28,7 +28,7 @@ namespace Multishop.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateImage(CreateImageDto image)
+        public async Task<IActionResult> CreateImage( CreateImageDto image)
         {
             await _imageService.CreateImageAsync(image);
             return RedirectToAction("Index");

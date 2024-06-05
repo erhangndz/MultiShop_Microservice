@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Multishop.Images.ConfigOptions;
 using Multishop.Images.Context;
@@ -9,7 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
 
+	opt.Authority = builder.Configuration["IdentityServerUrl"];
+	opt.Audience = "ResourceImages";
+});
 builder.Services.AddScoped<IImageService,ImageService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<ImagesContext>(opt =>
@@ -18,7 +25,10 @@ builder.Services.AddDbContext<ImagesContext>(opt =>
 });
 builder.Services.Configure<GCSConfigOptions>(builder.Configuration);
 builder.Services.AddSingleton<ICloudStorageService, CloudStorageService>();
-builder.Services.AddControllers();
+builder.Services.AddControllers(o =>
+{
+    o.Filters.Add(new AuthorizeFilter());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,7 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -7,11 +7,13 @@ using Multishop.Images.Dtos;
 using Multishop.Images.Entities;
 using Multishop.Images.Services;
 using Multishop.Images.Services.ImageServices;
+using System.Diagnostics;
+using System.Net;
 using System.Security.Cryptography.Xml;
 
 namespace Multishop.Images.Controllers
 {
-    [AllowAnonymous]
+   
     [Route("api/[controller]")]
     [ApiController]
     public class ImageUploadsController(IImageService _imageService) : ControllerBase
@@ -20,6 +22,7 @@ namespace Multishop.Images.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateImage(CreateImageDto image)
         {
+          
             await _imageService.CreateImageAsync(image);
             return Ok(image);
         }

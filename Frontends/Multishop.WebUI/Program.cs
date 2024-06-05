@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using Multishop.WebUI.ConfigOptions;
 using Multishop.WebUI.Extensions;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Hubs;
 using Multishop.WebUI.Services.CatalogServices.CategoryServices;
 using Multishop.WebUI.Services.Concrete;
+using Multishop.WebUI.Services.ImageServices;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,6 +30,9 @@ builder.Services.AddCors(opt =>
     });
 });
 
+
+builder.Services.Configure<GCSConfigOptions>(builder.Configuration);
+builder.Services.AddSingleton<ICloudStorageService, CloudStorageService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
     opt.LoginPath = "/Login/Index";

@@ -175,7 +175,7 @@ namespace Multishop.WebUI.Extensions
             services.AddHttpClient<IImageService, ImageService>(o =>
             {
                 o.BaseAddress = new Uri(serviceApiSettings.GatewayUrl + serviceApiSettings.Images.Path);
-            });
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
             services.AddHttpClient<ISignalRService, SignalRService>().AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
