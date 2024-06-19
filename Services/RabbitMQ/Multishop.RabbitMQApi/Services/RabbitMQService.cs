@@ -1,8 +1,9 @@
 ﻿using RabbitMQ.Client;
+using System.Text;
 
 namespace Multishop.RabbitMQApi.Services
 {
-    public class RabbitMQService
+    public class RabbitMQService: IRabbitMQService
     {
         public IConnection CreateConnection()
         {
@@ -14,7 +15,7 @@ namespace Multishop.RabbitMQApi.Services
             var connection = connectionFactory.CreateConnection();
             return connection;
 
-           
+
         }
 
         public IModel CreateChannel()
@@ -28,6 +29,14 @@ namespace Multishop.RabbitMQApi.Services
         {
             var channel = CreateChannel();
             channel.QueueDeclare(queueName, false, false, false, null);
+        }
+
+        public void BasicPublish(string queueName, string messageContent)
+        {
+
+            var channel = CreateChannel();
+            var byteMessage = Encoding.UTF8.GetBytes(messageContent);
+            channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: byteMessage);
         }
 
 

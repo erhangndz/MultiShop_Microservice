@@ -7,18 +7,14 @@ namespace Multishop.RabbitMQApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QMessagesController(RabbitMQService _service) : ControllerBase
+    public class QMessagesController(IRabbitMQService _service) : ControllerBase
     {
 
         [HttpPost]
         public IActionResult CreateMessage()
         {
-            var channel = _service.CreateChannel();
-            channel.QueueDeclare("Queue2", false, false, false, null);
-            var messageContent = "Merhaba bugün hava çok sıcak";
-
-            var byteMessage = Encoding.UTF8.GetBytes(messageContent);
-            channel.BasicPublish(exchange: "", routingKey: "Queue2", basicProperties: null, body: byteMessage);
+            _service.QueueDeclare("Queue3");
+            _service.BasicPublish("Queue3", "Bu bir deneme mesaj içeriğidir");
             return Ok("Mesaj Kuyruğa Alınmıştır.");
         }
 
