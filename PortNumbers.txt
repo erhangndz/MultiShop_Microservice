@@ -9,3 +9,4 @@ Comment  => https://localhost:7016
 Payment  => https://localhost:7027
 Images  => https://localhost:7275
 Message  => https://localhost:7017
+RabbitMQ  => https://localhost:7195
