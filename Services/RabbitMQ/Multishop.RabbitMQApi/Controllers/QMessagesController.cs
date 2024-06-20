@@ -21,7 +21,9 @@ namespace Multishop.RabbitMQApi.Controllers
         [HttpGet]
         public IActionResult ReadMessage()
         {
-            return Ok();
+
+          var value = _service.Consume("Queue3");
+            return Ok(value);
         }
     }
 }

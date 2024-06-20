@@ -1,10 +1,13 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace Multishop.RabbitMQApi.Services
 {
-    public class RabbitMQService: IRabbitMQService
+    public class RabbitMQService(): IRabbitMQService
     {
+        private static string _message;
         public IConnection CreateConnection()
         {
             var connectionFactory = new ConnectionFactory()
@@ -37,6 +40,37 @@ namespace Multishop.RabbitMQApi.Services
             var channel = CreateChannel();
             var byteMessage = Encoding.UTF8.GetBytes(messageContent);
             channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: byteMessage);
+        }
+
+        public EventingBasicConsumer CreateConsumer()
+        {
+            var channel = CreateChannel();
+            var consumer = new EventingBasicConsumer(channel);
+            return consumer;
+        }
+
+        
+        public string Consume(string queueName)
+        {
+            var consumer = CreateConsumer();
+
+            consumer.Received += (model, body) =>
+            {
+                var byteMessage = body.Body.ToArray();
+                _message = Encoding.UTF8.GetString(byteMessage);
+                
+            };
+            
+
+            var channel = CreateChannel();
+            channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
+
+            if (string.IsNullOrEmpty(_message))
+            {
+                return "";
+            }
+
+            return _message;
         }
 
 

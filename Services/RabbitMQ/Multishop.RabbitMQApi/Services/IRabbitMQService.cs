@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace Multishop.RabbitMQApi.Services
 {
@@ -11,5 +12,9 @@ namespace Multishop.RabbitMQApi.Services
         public void QueueDeclare(string queueName);
 
         public void BasicPublish(string queueName, string messageContent);
+
+        public EventingBasicConsumer CreateConsumer();
+
+        public string Consume(string queueName);
     }
 }
