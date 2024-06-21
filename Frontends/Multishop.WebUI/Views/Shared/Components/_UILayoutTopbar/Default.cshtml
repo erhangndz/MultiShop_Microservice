@@ -29,10 +29,12 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">TR</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">EN</button>
-                        <button class="dropdown-item" type="button">FR</button>
-                        <button class="dropdown-item" type="button">DE</button>
-                        <button class="dropdown-item" type="button">RU</button>
+                        <form asp-action="Index" asp-controller="Information" method="post">
+                            <button type="submit" name="culture" value="en" class="dropdown-item">English</button>
+                            <button type="submit" name="culture" value="fr" class="dropdown-item">French</button>
+                            <button type="submit" name="culture" value="de" class="dropdown-item">German</button>
+                            <button type="submit" name="culture" value="it" class="dropdown-item">Italian</button>
+                        </form>
                     </div>
                 </div>
             </div>
