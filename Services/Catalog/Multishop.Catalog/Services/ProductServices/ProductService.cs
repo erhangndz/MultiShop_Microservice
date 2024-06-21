@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using MassTransit;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Multishop.Catalog.Dtos.ProductDtos;
 using Multishop.Catalog.Entities;
 using Multishop.Catalog.Settings;
+using Multishop.SharedLibrary.RabbitMQEvents;
 
 namespace Multishop.Catalog.Services.ProductServices
 {
@@ -11,12 +13,14 @@ namespace Multishop.Catalog.Services.ProductServices
     {
         private readonly IMongoCollection<Product> _productCollection;
         private readonly IMapper _mapper;
-        public ProductService(IDatabaseSettings settings, IMapper mapper) : base(settings)
+        private readonly IPublishEndpoint _publishEndpoint;
+        public ProductService(IDatabaseSettings settings, IMapper mapper, IPublishEndpoint publishEndpoint) : base(settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _productCollection = database.GetCollection<Product>(typeof(Product).Name.ToLowerInvariant());
             _mapper = mapper;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task<List<ResultProductDto>> GetProductsByCategoryIdAsync(string categoryId)
@@ -71,6 +75,20 @@ namespace Multishop.Catalog.Services.ProductServices
                                                   .Project(projection)
                                                   .FirstOrDefaultAsync();
             return product.GetValue("ProductName").AsString;
+        }
+
+        public async Task UpdateProductAsync(UpdateProductDto updateProductDto)
+        {
+
+
+
+            await _productCollection.FindOneAndReplaceAsync<Product>(x => x.Id == updateProductDto.Id, _mapper.Map<Product>(updateProductDto));
+
+            await _publishEndpoint.Publish(new ProductNameChangedEvent
+            {
+                ProductId = updateProductDto.Id,
+                UpdatedName = updateProductDto.ProductName
+            });
         }
     }
 }

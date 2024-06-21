@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
@@ -20,6 +21,23 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddMassTransit(x =>
+{
+    
+    //default port : 5672
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        
+        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+        {
+            
+            host.Username("guest");
+            host.Password("guest");
+        });
+    });
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.Authority = builder.Configuration["IdentityServerUrl"];

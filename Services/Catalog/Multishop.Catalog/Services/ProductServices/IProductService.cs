@@ -12,5 +12,7 @@ namespace Multishop.Catalog.Services.ProductServices
 
         Task<string> GetMostExpensiveProductName();
         Task<string> GetCheapestProductName();
+
+        Task UpdateProductAsync(UpdateProductDto updateProductDto);
     }
 }

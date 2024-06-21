@@ -1,23 +1,24 @@
-using IdentityModel.AspNetCore.AccessTokenManagement;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Multishop.WebUI.ConfigOptions;
 using Multishop.WebUI.Extensions;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Hubs;
-using Multishop.WebUI.Services.CatalogServices.CategoryServices;
 using Multishop.WebUI.Services.Concrete;
 using Multishop.WebUI.Services.ImageServices;
 using Multishop.WebUI.Services.Interfaces;
 using Multishop.WebUI.Settings;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddLocalization(o =>
+{
+    o.ResourcesPath = "Resources";
+});
 builder.Services.AddSignalR();
 builder.Services.AddCors(opt =>
 {
@@ -68,7 +69,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews(o =>
 {
     o.Filters.Add(new AuthorizeFilter());
-});
+}).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
 
 var app = builder.Build();
 
@@ -86,6 +87,14 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+var supportedCultures = new[]
+{
+    "en","fr","de","it","tr"
+};
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[4]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 app.UseCors("CorsPolicy");
 
 app.MapControllerRoute(
