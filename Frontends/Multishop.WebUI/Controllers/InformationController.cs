@@ -1,21 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System.Globalization;
 
 namespace Multishop.WebUI.Controllers
 {
-    public class InformationController : Controller
+    [AllowAnonymous]
+    public class InformationController(IStringLocalizer<InformationController> _localizer) : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+     
 
         [HttpPost]
-        public IActionResult Index(string culture)
+        public IActionResult Index(string culture,string returnUrl)
         {
-            TempData["SelectedCulture"] = culture;
+            
 
-            return View("Index",culture);
+            return LocalRedirect(returnUrl);
         }
     }
 }

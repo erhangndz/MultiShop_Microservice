@@ -13,5 +13,8 @@
 
 
         public decimal TotalPrice { get => BasketItems.Sum(x => x.Price * x.Quantity); }
+
+
+        
     }
 }

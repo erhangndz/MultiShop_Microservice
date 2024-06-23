@@ -79,6 +79,7 @@
     <PackageReference Include="Google.Cloud.Storage.V1" Version="4.10.0" />
     <PackageReference Include="IdentityModel.AspNetCore" Version="3.0.0" />
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.4.4">
       <PrivateAssets>all</PrivateAssets>
@@ -91,11 +92,13 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Areas\User\Models\" />
+    <Folder Include="Views\Information\" />
     <Folder Include="wwwroot\spica\.git\refs\tags\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Services\SignalRRealTime\Multishop.SignalRRealTimeApi\Multishop.SignalRRealTimeApi.csproj" />
+    <ProjectReference Include="..\..\Shared\Multishop.SharedLibrary\Multishop.SharedLibrary.csproj" />
     <ProjectReference Include="..\Multishop.WebDTO\Multishop.WebDTO.csproj" />
   </ItemGroup>
 

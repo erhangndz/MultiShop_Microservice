@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransit.Transports;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
@@ -35,8 +36,16 @@ builder.Services.AddMassTransit(x =>
             host.Username("guest");
             host.Password("guest");
         });
+
+        
+
+        
     });
+
+    
 });
+builder.Services.AddMassTransitHostedService();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {

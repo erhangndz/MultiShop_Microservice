@@ -37,8 +37,8 @@ namespace Multishop.Catalog.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateProductDto updateProductDto)
         {
-            var value = _mapper.Map<Product>(updateProductDto);
-            await _productService.UpdateAsync(value);
+            
+            await _productService.UpdateProductAsync(updateProductDto);
             return Ok("Ürün Güncellendi");
         }
 

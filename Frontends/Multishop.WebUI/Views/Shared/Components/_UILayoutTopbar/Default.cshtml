@@ -1,11 +1,19 @@
-﻿<div class="container-fluid">
+﻿@using Microsoft.Extensions.Localization
+@using Multishop.WebUI.Resources
+@inject IServiceProvider ServiceProvider
+
+@{
+    var localizer = ServiceProvider.GetService(typeof(IStringLocalizer<SharedResources>)) as IStringLocalizer<SharedResources>;
+}
+
+<div class="container-fluid">
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
-                <a class="text-body mr-3" href="">Hakkımızda</a>
-                <a class="text-body mr-3" href="">İletişim</a>
-                <a class="text-body mr-3" href="">Yardım</a>
-                <a class="text-body mr-3" href="">SSS</a>
+                <a class="text-body mr-3" href="">@localizer["Hakkımızda"]</a>
+                <a class="text-body mr-3" href="">@localizer["İletişim"]</a>
+                <a class="text-body mr-3" href="">@localizer["Yardım"]</a>
+                <a class="text-body mr-3" href="">@localizer["SSS"]</a>
             </div>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
@@ -13,8 +21,8 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Hesabım</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">Giriş Yap</button>
-                        <button class="dropdown-item" type="button">Kayıt Ol</button>
+                        <button class="dropdown-item" type="button">@localizer["Giriş Yap"]</button>
+                        <button class="dropdown-item" type="button">@localizer["Kayıt Ol"]</button>
                     </div>
                 </div>
                 <div class="btn-group mx-2">
@@ -29,7 +37,7 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">TR</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <form asp-action="Index" asp-controller="Information" method="post">
+                        <form asp-action="Index" asp-controller="Information" asp-route-returnUrl="@Context.Request.Path" method="post">
                             <button type="submit" name="culture" value="en" class="dropdown-item">English</button>
                             <button type="submit" name="culture" value="fr" class="dropdown-item">French</button>
                             <button type="submit" name="culture" value="de" class="dropdown-item">German</button>

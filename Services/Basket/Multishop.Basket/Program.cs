@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
-using Multishop.Basket.Consumers;
 using Multishop.Basket.LoginServices;
 using Multishop.Basket.Services;
 using Multishop.Basket.Settings;
@@ -14,28 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-builder.Services.AddMassTransit(x =>
-{
-   
-    x.AddConsumer<ProductNameChangedEventConsumer>();
-    //default port : 5672
-    
-    x.UsingRabbitMq((context, cfg) =>
-    {
-        
-        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
-        {
-
-            host.Username("guest");
-            host.Password("guest");
-        });
-
-        cfg.ReceiveEndpoint("product-name-changed-event-basket-service", e =>
-        {
-            e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
-        });
-    });
-});
 
 
 

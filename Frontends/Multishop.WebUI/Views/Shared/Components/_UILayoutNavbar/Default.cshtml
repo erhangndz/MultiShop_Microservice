@@ -1,14 +1,21 @@
-﻿@model List<ResultCategoryDto>
+﻿@using Microsoft.Extensions.Localization
+@using Multishop.WebUI.Resources
+@inject IServiceProvider ServiceProvider
+
+@{
+    var localizer = ServiceProvider.GetService(typeof(IStringLocalizer<SharedResources>)) as IStringLocalizer<SharedResources>;
+}
+@model List<ResultCategoryDto>
 <div class="container-fluid bg-dark mb-30">
     <div class="row px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Kategoriler</h6>
+                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>@localizer["Kategoriler"]</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">
-                    <a href="/Shop/Index" class="nav-item nav-link">Tümü</a>
+                    <a href="/Shop/Index" class="nav-item nav-link">@localizer["Tümü"]</a>
                    @foreach (var item in Model)
                     {
                         <a href="/Shop/Index/@item.CategoryName" class="nav-item nav-link">@item.CategoryName</a>
@@ -29,23 +36,23 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="/Home/Index" class="nav-item nav-link @ViewData["home"]">Ana Sayfa</a>
-                        <a href="/Shop/Index" class="nav-item nav-link @ViewData["shop"]">Ürünler</a>
+                        <a href="/Home/Index" class="nav-item nav-link @ViewData["home"]">@localizer["Ana Sayfa"]</a>
+                        <a href="/Shop/Index" class="nav-item nav-link @ViewData["shop"]">@localizer["Ürünler"]</a>
                    
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sayfalar <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="/ShoppingCart/Index" class="dropdown-item">Sepetim</a>
-                                <a href="checkout.html" class="dropdown-item">Siparişlerim</a>
+                                <a href="/ShoppingCart/Index" class="dropdown-item">@localizer["Sepetim"]</a>
+                                <a href="checkout.html" class="dropdown-item">@localizer["Siparişlerim"]</a>
                             </div>
                         </div>
-                        <a href="/Contact/Index" class="nav-item nav-link @ViewData["contact"]">İletişim</a>
+                        <a href="/Contact/Index" class="nav-item nav-link @ViewData["contact"]">@localizer["İletişim"]</a>
 
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Üye İşlemleri <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="/Register/Index" class="dropdown-item">Kayıt Ol</a>
-                                <a href="/Login/Index" class="dropdown-item">Giriş Yap</a>
+                                <a href="/Register/Index" class="dropdown-item">@localizer["Kayıt Ol"]</a>
+                                <a href="/Login/Index" class="dropdown-item">@localizer["Giriş Yap"]</a>
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,10 @@
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Multishop.WebUI.ConfigOptions;
+using Multishop.WebUI.Consumers;
 using Multishop.WebUI.Extensions;
 using Multishop.WebUI.Handlers;
 using Multishop.WebUI.Hubs;
@@ -14,6 +16,8 @@ using Multishop.WebUI.Settings;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
 
 builder.Services.AddLocalization(o =>
 {
@@ -70,6 +74,32 @@ builder.Services.AddControllersWithViews(o =>
 {
     o.Filters.Add(new AuthorizeFilter());
 }).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
+
+builder.Services.AddMassTransit(x =>
+{
+
+    x.AddConsumer<ProductNameChangedEventConsumer>();
+    //default port : 5672
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+
+        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+        {
+
+            host.Username("guest");
+            host.Password("guest");
+        });
+
+        cfg.ReceiveEndpoint("product-name-changed-event-basket-service", e =>
+        {
+            e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
+
+        });
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
 
 var app = builder.Build();
 

@@ -8,7 +8,10 @@ namespace Multishop.SharedLibrary.RabbitMQEvents
 {
     public class ProductNameChangedEvent
     {
+        
         public string ProductId { get; set; }
         public string UpdatedName { get; set; }
+
+        public decimal UpdatedPrice { get; set; }
     }
 }
